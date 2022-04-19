@@ -1,0 +1,19 @@
+# depslib dependency file v1.0
+1650382881 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/main.cpp
+	<FL/Fl.H>
+	<FL/Fl_Window.H>
+	<FL/Fl_Box.H>
+
+1650383720 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/View/WordleWindow.cpp
+	"WordleWindow.h"
+
+1650383933 /home/scarrig1/Desktop/TeamAWordle/Wordle/View/WordleWindow.h
+	<FL/Fl.H>
+	<FL/Fl_Window.H>
+	<FL/Fl_Group.H>
+	<FL/Fl_Round_Button.H>
+	<FL/Fl_Output.H>
+	<FL/Fl_Text_Buffer.H>
+	<FL/Fl_Text_Display.H>
+	<FL/Fl_Button.H>
+
