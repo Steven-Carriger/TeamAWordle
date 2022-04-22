@@ -10,11 +10,22 @@
 #include <FL/Fl_Text_Display.H>
 #include <FL/Fl_Button.H>
 
+#include "string.h"
+#include <iostream>
+#include <vector>
+using namespace std;
+
 namespace view
 {
 
 class WordleWindow : public Fl_Window
 {
+    private:
+        vector<Fl_Button*> keyButtons;
+        vector<char*> keyLabels;
+        static void cbKeyPressed(Fl_Widget*);
+        void createTheKeyboard();
+        void addKeysToTheKeyboard();
     public:
         WordleWindow(int, int, const char*);
         virtual ~WordleWindow();
