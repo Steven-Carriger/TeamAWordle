@@ -24,8 +24,8 @@
 		<Linker>
 			<Add option="`fltk-config --ldstaticflags`" />
 		</Linker>
-		<Unit filename="View/wordle.cpp" />
-		<Unit filename="View/wordle.h" />
+		<Unit filename="View/WordleWindow.cpp" />
+		<Unit filename="View/WordleWindow.h" />
 		<Unit filename="main.cpp" />
 		<Extensions />
 	</Project>

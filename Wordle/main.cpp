@@ -7,7 +7,7 @@ using namespace view;
 
 int main (int argc, char ** argv)
 {
-  WordleWindow window(500, 500, "Wordle by Schmidt & Carriger");
+  WordleWindow window(750, 750, "Wordle by Schmidt & Carriger");
   window.show ();
   return(Fl::run());
 }
