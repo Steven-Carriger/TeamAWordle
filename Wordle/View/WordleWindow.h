@@ -11,6 +11,7 @@
 #include <FL/Fl_Button.H>
 
 #include "string.h"
+#include <ctype.h>
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -23,7 +24,10 @@ class WordleWindow : public Fl_Window
     private:
         vector<Fl_Button*> keyButtons;
         vector<char*> keyLabels;
-        static void cbKeyPressed(Fl_Widget*);
+        static void cbKeyPressed(Fl_Widget*, void*);
+        int handle(int event);
+        int handleKeyPressed(int event);
+        void handleInput(const char*);
         void createTheKeyboard();
         void addKeysToTheKeyboard();
     public:
