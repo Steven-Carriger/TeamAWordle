@@ -22,3 +22,35 @@
 	<iostream>
 	<vector>
 
+1650662336 source:/home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/main.cpp
+	<FL/Fl.H>
+	<FL/Fl_Window.H>
+	<FL/Fl_Box.H>
+	"WordleWindow.h"
+
+1650662329 /home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/View/WordleWindow.h
+	<FL/Fl.H>
+	<FL/Fl_Window.H>
+	<FL/Fl_Group.H>
+	<FL/Fl_Round_Button.H>
+	<FL/Fl_Output.H>
+	<FL/Fl_Text_Buffer.H>
+	<FL/Fl_Text_Display.H>
+	<FL/Fl_Button.H>
+
+1650684687 source:/home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/View/WordleWindow.cpp
+	"WordleWindow.h"
+	"WordleManager.h"
+	<iostream>
+
+1650685101 source:/home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/Model/WordleManager.cpp
+	"WordleManager.h"
+	<fstream>
+	<cstdlib>
+	<ctime>
+	<iostream>
+
+1650680600 /home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/Model/WordleManager.h
+	<string>
+	<vector>
+

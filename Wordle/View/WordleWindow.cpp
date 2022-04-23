@@ -1,4 +1,9 @@
 #include "WordleWindow.h"
+#include "WordleManager.h"
+using namespace model;
+
+#include <iostream>
+using namespace std;
 
 #define NUMBER_OF_KEYS 28
 #define KEYBOARD_X 90
@@ -35,8 +40,8 @@ int WordleWindow::handle(int event)
     }
     switch(event)
     {
-        case FL_KEYBOARD:
-            return handleKeyPressed(event);
+    case FL_KEYBOARD:
+        return handleKeyPressed(event);
     }
 }
 
@@ -55,10 +60,12 @@ void WordleWindow::addKeysToTheKeyboard()
         this->keyButtons.push_back(newKeyButton);
         rowCount++;
 
-        if (rowCount == MAX_FIRST_ROW && isFirstRow) {
+        if (rowCount == MAX_FIRST_ROW && isFirstRow)
+        {
             isFirstRow = false;
         }
-        if (rowCount >= MAX_OTHER_ROWS && !isFirstRow) {
+        if (rowCount >= MAX_OTHER_ROWS && !isFirstRow)
+        {
             x = KEYBOARD_X + X_OFFSET;
             rowCount = EMPTY_VALUE;
             y += BUTTON_PADDING;

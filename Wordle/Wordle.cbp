@@ -15,6 +15,7 @@
 					<Add option="-std=c++11" />
 					<Add option="-g" />
 					<Add directory="View" />
+					<Add directory="Model" />
 				</Compiler>
 			</Target>
 		</Build>
@@ -24,8 +25,11 @@
 		<Linker>
 			<Add option="`fltk-config --ldstaticflags`" />
 		</Linker>
+		<Unit filename="Model/WordleManager.cpp" />
+		<Unit filename="Model/WordleManager.h" />
 		<Unit filename="View/WordleWindow.cpp" />
 		<Unit filename="View/WordleWindow.h" />
+		<Unit filename="dictionary.txt" />
 		<Unit filename="main.cpp" />
 		<Extensions />
 	</Project>
