@@ -15,9 +15,9 @@ namespace view
 
 class WordleWindow : public Fl_Window
 {
-    public:
-        WordleWindow(int, int, const char*);
-        virtual ~WordleWindow();
+public:
+    WordleWindow(int, int, const char*);
+    virtual ~WordleWindow();
 };
 }
 #endif // WORDLEWINDOW_H
