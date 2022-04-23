@@ -54,7 +54,8 @@ void WordleManager::randomizeWord()
     this->currentWord = tmpWord;
 }
 
-bool WordleManager::validateWord(const string& word) {
+bool WordleManager::validateWord(const string& word)
+{
     if (word.length() == this->wordLength) return false;
     for (auto aWord = this->dictionary.begin(); aWord != this->dictionary.end(); ++aWord)
     {
@@ -63,16 +64,19 @@ bool WordleManager::validateWord(const string& word) {
     return false;
 }
 
-bool WordleManager::guessWord(const string& word) {
+bool WordleManager::guessWord(const string& word)
+{
     return this->currentWord == word;
 }
 
-vector<WordleManager::LetterState> WordleManager::getDetails(const string& word) {
+vector<WordleManager::LetterState> WordleManager::getDetails(const string& word)
+{
     vector<WordleManager::LetterState> states(this->wordLength);
     string tmpWord(this->currentWord);
     for (int i = 0; i < word.length(); ++i)
     {
-        if (word[i] == this->currentWord[i]) {
+        if (word[i] == this->currentWord[i])
+        {
             states[i] = LetterState::CORRECT;
             tmpWord = tmpWord.replace(i, 1, " ");
         }
@@ -80,7 +84,8 @@ vector<WordleManager::LetterState> WordleManager::getDetails(const string& word)
 
     for (int i = 0; i < word.length(); ++i)
     {
-        if (tmpWord.find(word[i]) != string::npos) {
+        if (tmpWord.find(word[i]) != string::npos)
+        {
             states[i] = WordleManager::LetterState::IN_WORD;
         }
     }

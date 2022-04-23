@@ -11,7 +11,8 @@ namespace model
 class WordleManager
 {
 public:
-    enum LetterState {
+    enum LetterState
+    {
         NOT_IN_WORD, IN_WORD, CORRECT, UNKNOWN
     };
 private:
