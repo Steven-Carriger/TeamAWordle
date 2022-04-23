@@ -22,13 +22,13 @@
 	<iostream>
 	<vector>
 
-1650662336 source:/home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/main.cpp
+1650728696 source:/home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/main.cpp
 	<FL/Fl.H>
 	<FL/Fl_Window.H>
 	<FL/Fl_Box.H>
 	"WordleWindow.h"
 
-1650662329 /home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/View/WordleWindow.h
+1650728653 /home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/View/WordleWindow.h
 	<FL/Fl.H>
 	<FL/Fl_Window.H>
 	<FL/Fl_Group.H>
@@ -37,20 +37,48 @@
 	<FL/Fl_Text_Buffer.H>
 	<FL/Fl_Text_Display.H>
 	<FL/Fl_Button.H>
+	"string.h"
+	<ctype.h>
+	<iostream>
+	<vector>
+	"WordleDisplayControl.h"
+	"WordleKeyboardControl.h"
 
-1650684687 source:/home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/View/WordleWindow.cpp
+1650740681 source:/home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/View/WordleWindow.cpp
 	"WordleWindow.h"
 	"WordleManager.h"
 	<iostream>
 
-1650685101 source:/home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/Model/WordleManager.cpp
+1650686664 source:/home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/Model/WordleManager.cpp
 	"WordleManager.h"
 	<fstream>
 	<cstdlib>
 	<ctime>
 	<iostream>
 
-1650680600 /home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/Model/WordleManager.h
+1650686664 /home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/Model/WordleManager.h
 	<string>
 	<vector>
+
+1650727001 /home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/View/WordleDisplayControl.h
+	<string>
+	"WordleManager.h"
+	<FL/Fl_Group.H>
+	<FL/Fl_Box.H>
+
+1650727805 source:/home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/View/WordleDisplayControl.cpp
+	"WordleDisplayControl.h"
+	<algorithm>
+	<iostream>
+	<FL/Fl_Box.H>
+
+1650740273 source:/home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/View/WordleKeyboardControl.cpp
+	"WordleKeyboardControl.h"
+	<algorithm>
+	<iostream>
+
+1650727190 /home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/View/WordleKeyboardControl.h
+	<vector>
+	<FL/Fl_Group.H>
+	<FL/Fl_Button.H>
 

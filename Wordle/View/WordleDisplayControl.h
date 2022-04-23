@@ -4,7 +4,11 @@
 #include <string>
 using namespace std;
 
+#include "WordleManager.h"
+using namespace model;
+
 #include <FL/Fl_Group.H>
+#include <FL/Fl_Box.H>
 
 namespace view
 {
@@ -17,16 +21,16 @@ private:
     int currLetter;
     int currWord;
     bool guessing;
-    string guessWord;
-    string guess;
+    vector<Fl_Box*> boxs;
 
 public:
     WordleDisplayControl(int x, int y, int width, int height, int guessLimit, int wordLength);
     virtual ~WordleDisplayControl();
     bool addLetter(const char* letter);
     bool removeLetter();
-    bool submitWord();
-
+    void submitWord(vector<WordleManager::LetterState> wordState);
+private:
+    void createGrid();
 };
 
 };
