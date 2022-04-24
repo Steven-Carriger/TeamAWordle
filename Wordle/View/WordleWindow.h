@@ -16,6 +16,9 @@
 #include <vector>
 using namespace std;
 
+#include "WordleManager.h"
+using namespace model;
+
 #include "WordleDisplayControl.h"
 #include "WordleKeyboardControl.h"
 
@@ -25,6 +28,7 @@ namespace view
 class WordleWindow : public Fl_Window
 {
 private:
+    WordleManager* manager;
     string word;
     WordleDisplayControl* displayControl;
     WordleKeyboardControl* keyboardControl;

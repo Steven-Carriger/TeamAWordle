@@ -52,16 +52,20 @@ void WordleKeyboardControl::createButtons()
         }
 
         Fl_Button* newKeyButton;
-        if (keyLabels[i] == "ENTER") {
+        if (keyLabels[i] == "ENTER")
+        {
             newKeyButton = new Fl_Button(x + colMod * (keySize + KEYBOARD_GAP) - NON_LETTER_LENGTH, initY + row * (keySize + KEYBOARD_GAP), keySize + NON_LETTER_LENGTH, keySize, keyLabels[i]);
             newKeyButton->callback(handleEnterPress);
             newKeyButton->shortcut(FL_Enter);
         }
-        else if (keyLabels[i] == "BACK") {
+        else if (keyLabels[i] == "BACK")
+        {
             newKeyButton = new Fl_Button(x + colMod * (keySize + KEYBOARD_GAP), initY + row * (keySize + KEYBOARD_GAP), keySize + NON_LETTER_LENGTH, keySize, keyLabels[i]);
             newKeyButton->callback(handleBackPress);
             newKeyButton->shortcut(FL_BackSpace);
-        } else {
+        }
+        else
+        {
             newKeyButton = new Fl_Button(x + colMod * (keySize + KEYBOARD_GAP), initY + row * (keySize + KEYBOARD_GAP), keySize, keySize, keyLabels[i]);
             newKeyButton->callback(handleLetterPress);
             newKeyButton->shortcut(tolower(keyLabels[i][0]));
@@ -72,15 +76,18 @@ void WordleKeyboardControl::createButtons()
     }
 }
 
-void WordleKeyboardControl::setLetterCallback(LetterCallback letterCallback) {
+void WordleKeyboardControl::setLetterCallback(LetterCallback letterCallback)
+{
     this->letterCallback = letterCallback;
 }
 
-void WordleKeyboardControl::setEnterCallback(EnterCallback enterCallback) {
+void WordleKeyboardControl::setEnterCallback(EnterCallback enterCallback)
+{
     this->enterCallback = enterCallback;
 }
 
-void WordleKeyboardControl::setBackCallback(BackCallback backCallback) {
+void WordleKeyboardControl::setBackCallback(BackCallback backCallback)
+{
     this->backCallback = backCallback;
 }
 

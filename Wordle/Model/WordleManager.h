@@ -16,14 +16,13 @@ public:
         NOT_IN_WORD, IN_WORD, CORRECT, UNKNOWN
     };
 private:
-    int wordLength;
     vector<string> dictionary;
     string currentWord;
 public:
-    WordleManager(int wordLength);
+    WordleManager();
     virtual ~WordleManager();
     const string& getCurrentWord();
-    void randomizeWord();
+    void randomizeWord(int wordLength);
     bool validateWord(const string& word);
     bool guessWord(const string& word);
     vector<WordleManager::LetterState> getDetails(const string& word);

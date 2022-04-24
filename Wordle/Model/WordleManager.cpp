@@ -11,9 +11,8 @@ using namespace std;
 namespace model
 {
 
-WordleManager::WordleManager(int wordLength)
+WordleManager::WordleManager()
 {
-    this->wordLength = wordLength;
     this->load();
     srand((int) time(0));
 }
@@ -45,23 +44,26 @@ const string& WordleManager::getCurrentWord()
     return this->currentWord;
 }
 
-void WordleManager::randomizeWord()
+void WordleManager::randomizeWord(int wordLength)
 {
     string tmpWord;
-    while (tmpWord.length() != this->wordLength)
+    while (tmpWord.length() != wordLength)
     {
         int indx = rand() % this->dictionary.size();
         tmpWord = this->dictionary[indx];
     }
     this->currentWord = tmpWord;
+    cout << this->currentWord << endl;
 }
 
 bool WordleManager::validateWord(const string& word)
 {
-    if (word.length() == this->wordLength) return false;
+    if (word.length() != this->currentWord.length()) return false;
+
     for (auto aWord = this->dictionary.begin(); aWord != this->dictionary.end(); ++aWord)
     {
         if (*aWord == toLowerCase(word)) return true;
+
     }
     return false;
 }
@@ -73,7 +75,7 @@ bool WordleManager::guessWord(const string& word)
 
 vector<WordleManager::LetterState> WordleManager::getDetails(const string& word)
 {
-    vector<WordleManager::LetterState> states(this->wordLength);
+    vector<WordleManager::LetterState> states(this->currentWord.length());
     string tmpWord(this->currentWord);
     for (int i = 0; i < word.length(); ++i)
     {

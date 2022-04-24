@@ -28,7 +28,7 @@
 	<FL/Fl_Box.H>
 	"WordleWindow.h"
 
-1650765288 /home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/View/WordleWindow.h
+1650766242 /home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/View/WordleWindow.h
 	<FL/Fl.H>
 	<FL/Fl_Window.H>
 	<FL/Fl_Group.H>
@@ -41,16 +41,16 @@
 	<ctype.h>
 	<iostream>
 	<vector>
+	"WordleManager.h"
 	"WordleDisplayControl.h"
 	"WordleKeyboardControl.h"
 
-1650765517 source:/home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/View/WordleWindow.cpp
+1650768035 source:/home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/View/WordleWindow.cpp
 	"WordleWindow.h"
-	"WordleManager.h"
 	<iostream>
 	<functional>
 
-1650743105 source:/home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/Model/WordleManager.cpp
+1650768027 source:/home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/Model/WordleManager.cpp
 	"WordleManager.h"
 	<fstream>
 	<cstdlib>
@@ -58,7 +58,7 @@
 	<iostream>
 	"Utils.h"
 
-1650686664 /home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/Model/WordleManager.h
+1650766706 /home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/Model/WordleManager.h
 	<string>
 	<vector>
 
@@ -68,7 +68,7 @@
 	<FL/Fl_Group.H>
 	<FL/Fl_Box.H>
 
-1650742868 source:/home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/View/WordleDisplayControl.cpp
+1650767798 source:/home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/View/WordleDisplayControl.cpp
 	"WordleDisplayControl.h"
 	<algorithm>
 	<iostream>
