@@ -28,7 +28,8 @@ WordleDisplayControl::~WordleDisplayControl()
     //dtor
 }
 
-void WordleDisplayControl::createGrid() {
+void WordleDisplayControl::createGrid()
+{
     int boxSize = min((this->w() - (this->wordLength - 1) * DISPLAY_GAP) / this->wordLength, (this->h() - (this->guessLimit - 1) * DISPLAY_GAP)/ this->guessLimit);
     int initX = this->x() + (this->w() - (this->wordLength - 1) * DISPLAY_GAP - wordLength * boxSize) / 2;
     int initY = this->y() + (this->h() - (this->guessLimit - 1) * DISPLAY_GAP - guessLimit * boxSize) / 2;
@@ -67,12 +68,17 @@ void WordleDisplayControl::submitWord(vector<WordleManager::LetterState> wordSta
     bool isAllCorrect = true;
     for (auto aState = wordState.begin(); aState != wordState.end(); ++aState)
     {
-        if (*aState == WordleManager::LetterState::CORRECT) {
+        if (*aState == WordleManager::LetterState::CORRECT)
+        {
             this->child(currIndx)->color(FL_GREEN);
-        } else if (*aState == WordleManager::LetterState::IN_WORD) {
+        }
+        else if (*aState == WordleManager::LetterState::IN_WORD)
+        {
             this->child(currIndx)->color(FL_YELLOW);
             isAllCorrect = false;
-        } else if (*aState == WordleManager::LetterState::NOT_IN_WORD) {
+        }
+        else if (*aState == WordleManager::LetterState::NOT_IN_WORD)
+        {
             this->child(currIndx)->color(FL_GRAY);
             isAllCorrect = false;
         }

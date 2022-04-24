@@ -6,6 +6,8 @@
 #include <iostream>
 using namespace std;
 
+#include "Utils.h"
+
 namespace model
 {
 
@@ -59,14 +61,14 @@ bool WordleManager::validateWord(const string& word)
     if (word.length() == this->wordLength) return false;
     for (auto aWord = this->dictionary.begin(); aWord != this->dictionary.end(); ++aWord)
     {
-        if (*aWord == word) return true;
+        if (*aWord == toLowerCase(word)) return true;
     }
     return false;
 }
 
 bool WordleManager::guessWord(const string& word)
 {
-    return this->currentWord == word;
+    return this->currentWord == toLowerCase(word);
 }
 
 vector<WordleManager::LetterState> WordleManager::getDetails(const string& word)
@@ -75,7 +77,7 @@ vector<WordleManager::LetterState> WordleManager::getDetails(const string& word)
     string tmpWord(this->currentWord);
     for (int i = 0; i < word.length(); ++i)
     {
-        if (word[i] == this->currentWord[i])
+        if (tolower(word[i]) == this->currentWord[i])
         {
             states[i] = LetterState::CORRECT;
             tmpWord = tmpWord.replace(i, 1, " ");
@@ -84,7 +86,7 @@ vector<WordleManager::LetterState> WordleManager::getDetails(const string& word)
 
     for (int i = 0; i < word.length(); ++i)
     {
-        if (tmpWord.find(word[i]) != string::npos)
+        if (tmpWord.find(tolower(word[i])) != string::npos)
         {
             states[i] = WordleManager::LetterState::IN_WORD;
         }

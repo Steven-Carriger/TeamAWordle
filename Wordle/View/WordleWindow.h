@@ -28,15 +28,13 @@ private:
     string word;
     WordleDisplayControl* displayControl;
     WordleKeyboardControl* keyboardControl;
-    static void cbKeyPressed(Fl_Widget*, void*);
-    int handle(int event);
-    int handleKeyPressed(int event);
-    void handleInput(const char*);
-    void handleEnter();
-    void handleBack();
 public:
     WordleWindow(int x, int y, const char* title);
     virtual ~WordleWindow();
+private:
+    static void handleLetterPress(WordleWindow* window, const char* key);
+    static void handleEnterPress(WordleWindow* window);
+    static void handleBackPress(WordleWindow* window);
 };
 }
 #endif // WORDLEWINDOW_H
