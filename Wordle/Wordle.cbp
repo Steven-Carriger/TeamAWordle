@@ -16,6 +16,7 @@
 					<Add option="-g" />
 					<Add directory="View" />
 					<Add directory="Model" />
+					<Add directory="Utils" />
 				</Compiler>
 			</Target>
 		</Build>
@@ -27,6 +28,12 @@
 		</Linker>
 		<Unit filename="Model/WordleManager.cpp" />
 		<Unit filename="Model/WordleManager.h" />
+		<Unit filename="Utils/Utils.cpp" />
+		<Unit filename="Utils/Utils.h" />
+		<Unit filename="View/WordleDisplayControl.cpp" />
+		<Unit filename="View/WordleDisplayControl.h" />
+		<Unit filename="View/WordleKeyboardControl.cpp" />
+		<Unit filename="View/WordleKeyboardControl.h" />
 		<Unit filename="View/WordleWindow.cpp" />
 		<Unit filename="View/WordleWindow.h" />
 		<Unit filename="dictionary.txt" />

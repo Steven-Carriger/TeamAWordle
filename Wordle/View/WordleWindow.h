@@ -16,23 +16,29 @@
 #include <vector>
 using namespace std;
 
+#include "WordleManager.h"
+using namespace model;
+
+#include "WordleDisplayControl.h"
+#include "WordleKeyboardControl.h"
+
 namespace view
 {
 
 class WordleWindow : public Fl_Window
 {
 private:
-    vector<Fl_Button*> keyButtons;
-    vector<char*> keyLabels;
-    static void cbKeyPressed(Fl_Widget*, void*);
-    int handle(int event);
-    int handleKeyPressed(int event);
-    void handleInput(const char*);
-    void createTheKeyboard();
-    void addKeysToTheKeyboard();
+    WordleManager* manager;
+    string word;
+    WordleDisplayControl* displayControl;
+    WordleKeyboardControl* keyboardControl;
 public:
-    WordleWindow(int, int, const char*);
+    WordleWindow(int x, int y, const char* title);
     virtual ~WordleWindow();
+private:
+    static void handleLetterPress(WordleWindow* window, const char* key);
+    static void handleEnterPress(WordleWindow* window);
+    static void handleBackPress(WordleWindow* window);
 };
 }
 #endif // WORDLEWINDOW_H

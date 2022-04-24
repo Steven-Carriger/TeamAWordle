@@ -1,107 +1,56 @@
 #include "WordleWindow.h"
-#include "WordleManager.h"
-using namespace model;
 
 #include <iostream>
+#include <functional>
 using namespace std;
+using namespace std::placeholders;
 
-#define NUMBER_OF_KEYS 28
-#define KEYBOARD_X 90
-#define KEYBOARD_Y 575
-#define BUTTON_WIDTH 50
-#define BUTTON_HEIGHT 50
-#define X_OFFSET 25
-#define MAX_FIRST_ROW 10
-#define MAX_OTHER_ROWS 9
-#define BUTTON_PADDING 55
-#define EMPTY_VALUE 0
+#define PADDING 20
 namespace view
 {
 
 WordleWindow::WordleWindow(int width, int height, const char* title) : Fl_Window(width, height, title)
 {
     begin();
-    this->keyLabels = {"Q","W","E","R","T","Y","U","I","O","P","A","S","D","F","G","H","J","K","L","Enter","Z","X","C","V","B","N","M","Back"};
-    this->createTheKeyboard();
+    this->displayControl = new WordleDisplayControl(PADDING, PADDING, width - 2 * PADDING, (height - PADDING) / 2, 6, 5);
+    this->keyboardControl = new WordleKeyboardControl(PADDING, (height - PADDING) / 2, width - 2 * PADDING, height / 2);
     end();
+    this->keyboardControl->setLetterCallback(bind(handleLetterPress, this, _1));
+    this->keyboardControl->setEnterCallback(bind(handleEnterPress, this));
+    this->keyboardControl->setBackCallback(bind(handleBackPress, this));
+    this->manager = new WordleManager();
+    this->manager->randomizeWord(5);
+    this->word = "";
 }
 
-void WordleWindow::createTheKeyboard()
+void WordleWindow::handleLetterPress(WordleWindow* window, const char* key)
 {
-    this->keyButtons = vector<Fl_Button*>();
-    this->addKeysToTheKeyboard();
-}
-
-int WordleWindow::handle(int event)
-{
-    if (Fl_Group::handle(event))
+    if (window->displayControl->addLetter(key))
     {
-        return 1;
-    }
-    switch(event)
-    {
-    case FL_KEYBOARD:
-        return handleKeyPressed(event);
+        window->word.append(key);
     }
 }
 
-void WordleWindow::addKeysToTheKeyboard()
+
+void WordleWindow::handleEnterPress(WordleWindow* window)
 {
-    int x = KEYBOARD_X;
-    int y = KEYBOARD_Y;
-    int rowCount = EMPTY_VALUE;
-    bool isFirstRow = true;
-
-    for (int i = EMPTY_VALUE; i < NUMBER_OF_KEYS; i++)
+    if (window->manager->validateWord(window->word))
     {
-        Fl_Button* newKeyButton = new Fl_Button(x + BUTTON_PADDING * rowCount, y, BUTTON_WIDTH, BUTTON_HEIGHT, this->keyLabels[i]);
-        newKeyButton->callback(cbKeyPressed, this);
-
-        this->keyButtons.push_back(newKeyButton);
-        rowCount++;
-
-        if (rowCount == MAX_FIRST_ROW && isFirstRow)
-        {
-            isFirstRow = false;
-        }
-        if (rowCount >= MAX_OTHER_ROWS && !isFirstRow)
-        {
-            x = KEYBOARD_X + X_OFFSET;
-            rowCount = EMPTY_VALUE;
-            y += BUTTON_PADDING;
-        }
+        window->displayControl->submitWord(window->manager->getDetails(window->word));
+        window->word = "";
     }
 }
 
-void WordleWindow::cbKeyPressed(Fl_Widget* widget, void* data)
+void WordleWindow::handleBackPress(WordleWindow* window)
 {
-    WordleWindow* window = (WordleWindow*) data;
-    window->handleInput(widget->label());
-}
-
-void WordleWindow::handleInput(const char* key)
-{
-    cout << "Key: " << key << " was pressed"<< endl;
-}
-
-int WordleWindow::handleKeyPressed(int event)
-{
-    if (Fl::event_key() == FL_Enter)
+    if (window->displayControl->removeLetter())
     {
-        this->handleInput("Enter");
-        return 1;
+        window->word.pop_back();
     }
-    if (Fl::event_key() == FL_BackSpace)
-    {
-        this->handleInput("Back");
-        return 1;
-    }
-    this->handleInput(Fl::event_text());
-    return 1;
 }
 
 WordleWindow::~WordleWindow()
 {
-    //dtor
 }
+
 }
