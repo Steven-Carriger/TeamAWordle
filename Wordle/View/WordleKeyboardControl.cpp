@@ -111,4 +111,40 @@ void WordleKeyboardControl::handleBackPress(Fl_Widget* sender)
     keyboard->backCallback();
 }
 
+void WordleKeyboardControl::updateKeys(vector<WordleManager::LetterState> wordState, const string& userWord)
+{
+    for (int currIndx = 0; currIndx < userWord.length(); currIndx++)
+    {
+        this->setKeyStatus(this->getKeyWithLetter(userWord[currIndx]), wordState[currIndx]);
+    }
+    this->redraw();
+}
+
+void WordleKeyboardControl::setKeyStatus(Fl_Button* key, WordleManager::LetterState letterState)
+{
+    switch (letterState)
+    {
+        case WordleManager::LetterState::CORRECT:
+            key->color(FL_GREEN);
+            return key->redraw();
+        case WordleManager::LetterState::IN_WORD:
+            key->color(FL_YELLOW);
+            return key->redraw();
+        case WordleManager::LetterState::NOT_IN_WORD:
+            key->color(FL_GRAY);
+            return key->redraw();
+    }
+}
+
+Fl_Button* WordleKeyboardControl::getKeyWithLetter(const char letter)
+{
+    for (Fl_Button* button : this->buttons)
+    {
+        if (strcmp(button->label(), &letter) == 0)
+        {
+            return button;
+        }
+    }
+}
+
 }

@@ -1,14 +1,16 @@
 # depslib dependency file v1.0
-1650650933 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/main.cpp
+1650769343 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/main.cpp
 	<FL/Fl.H>
 	<FL/Fl_Window.H>
 	<FL/Fl_Box.H>
 	"WordleWindow.h"
 
-1650664136 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/View/WordleWindow.cpp
+1650774494 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/View/WordleWindow.cpp
 	"WordleWindow.h"
+	<iostream>
+	<functional>
 
-1650667329 /home/scarrig1/Desktop/TeamAWordle/Wordle/View/WordleWindow.h
+1650769343 /home/scarrig1/Desktop/TeamAWordle/Wordle/View/WordleWindow.h
 	<FL/Fl.H>
 	<FL/Fl_Window.H>
 	<FL/Fl_Group.H>
@@ -21,6 +23,9 @@
 	<ctype.h>
 	<iostream>
 	<vector>
+	"WordleManager.h"
+	"WordleDisplayControl.h"
+	"WordleKeyboardControl.h"
 
 1650728696 source:/home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/main.cpp
 	<FL/Fl.H>
@@ -93,4 +98,51 @@
 1650742972 source:/home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/Utils/Utils.cpp
 	"Utils.h"
 	<algorithm>
+
+1650769343 /home/scarrig1/Desktop/TeamAWordle/Wordle/Model/WordleManager.h
+	<string>
+	<vector>
+
+1650769343 /home/scarrig1/Desktop/TeamAWordle/Wordle/View/WordleDisplayControl.h
+	<string>
+	"WordleManager.h"
+	<FL/Fl_Group.H>
+	<FL/Fl_Box.H>
+
+1650776393 /home/scarrig1/Desktop/TeamAWordle/Wordle/View/WordleKeyboardControl.h
+	<vector>
+	<functional>
+	<string.h>
+	<bits/stdc++.h>
+	"WordleManager.h"
+	<FL/Fl_Group.H>
+	<FL/Fl_Button.H>
+	<FL/Fl_Widget.H>
+
+1650769343 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/Model/WordleManager.cpp
+	"WordleManager.h"
+	<fstream>
+	<cstdlib>
+	<ctime>
+	<iostream>
+	"Utils.h"
+
+1650769343 /home/scarrig1/Desktop/TeamAWordle/Wordle/Utils/Utils.h
+	<string>
+
+1650769343 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/Utils/Utils.cpp
+	"Utils.h"
+	<algorithm>
+
+1650769343 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/View/WordleDisplayControl.cpp
+	"WordleDisplayControl.h"
+	<algorithm>
+	<iostream>
+	<FL/Fl_Box.H>
+
+1650777691 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/View/WordleKeyboardControl.cpp
+	"WordleKeyboardControl.h"
+	<algorithm>
+	<iostream>
+	"Utils.h"
 

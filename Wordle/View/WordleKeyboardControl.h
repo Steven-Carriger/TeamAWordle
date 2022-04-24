@@ -3,7 +3,12 @@
 
 #include <vector>
 #include <functional>
+#include <string.h>
+#include <bits/stdc++.h>
 using namespace std;
+
+#include "WordleManager.h"
+using namespace model;
 
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Button.H>
@@ -29,8 +34,11 @@ public:
     void setLetterCallback(LetterCallback callback);
     void setEnterCallback(EnterCallback callback);
     void setBackCallback(BackCallback callback);
+    void updateKeys(vector<WordleManager::LetterState> wordState, const string& userWord);
 private:
     void createButtons();
+    void setKeyStatus(Fl_Button* key, WordleManager::LetterState letterState);
+    Fl_Button* getKeyWithLetter(const char letter);
     static void handleLetterPress(Fl_Widget* sender);
     static void handleEnterPress(Fl_Widget* sender);
     static void handleBackPress(Fl_Widget* sender);
