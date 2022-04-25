@@ -31,7 +31,6 @@ WordleKeyboardControl::~WordleKeyboardControl()
 
 void WordleKeyboardControl::createButtons()
 {
-
     int keySize = min((this->w() - NUM_FIRST_ROW * KEYBOARD_GAP) / NUM_FIRST_ROW, (this->h() - NUM_ROW * KEYBOARD_GAP) / NUM_ROW);
     int initXFirstRow = this->x() + (this->w() - (NUM_FIRST_ROW - 1) * KEYBOARD_GAP - NUM_FIRST_ROW * keySize) / 2;
     int initXOtherRow = this->x() + (this->w() - (NUM_OTHER_ROW - 1) * KEYBOARD_GAP - NUM_OTHER_ROW * keySize) / 2;
@@ -91,8 +90,6 @@ void WordleKeyboardControl::setBackCallback(BackCallback backCallback)
     this->backCallback = backCallback;
 }
 
-
-
 void WordleKeyboardControl::handleLetterPress(Fl_Widget* sender)
 {
     WordleKeyboardControl* keyboard = (WordleKeyboardControl*) sender->parent();
@@ -115,7 +112,10 @@ void WordleKeyboardControl::updateKeys(vector<WordleManager::LetterState> wordSt
 {
     for (int currIndx = 0; currIndx < userWord.length(); currIndx++)
     {
-        this->setKeyStatus(this->getKeyWithLetter(userWord[currIndx]), wordState[currIndx]);
+        Fl_Button* button = this->getKeyWithLetter(userWord[currIndx]);
+        if (button != nullptr) {
+            this->setKeyStatus(button, wordState[currIndx]);
+        }
     }
     this->redraw();
 }
@@ -126,13 +126,13 @@ void WordleKeyboardControl::setKeyStatus(Fl_Button* key, WordleManager::LetterSt
     {
         case WordleManager::LetterState::CORRECT:
             key->color(FL_GREEN);
-            return key->redraw();
+            return;
         case WordleManager::LetterState::IN_WORD:
             key->color(FL_YELLOW);
-            return key->redraw();
+            return;
         case WordleManager::LetterState::NOT_IN_WORD:
-            key->color(FL_GRAY);
-            return key->redraw();
+            key->color(FL_BLACK);
+            return;
     }
 }
 
@@ -145,6 +145,7 @@ Fl_Button* WordleKeyboardControl::getKeyWithLetter(const char letter)
             return button;
         }
     }
+    return nullptr;
 }
 
 }

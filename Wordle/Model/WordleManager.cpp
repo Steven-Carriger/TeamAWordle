@@ -76,23 +76,26 @@ bool WordleManager::guessWord(const string& word)
 vector<WordleManager::LetterState> WordleManager::getDetails(const string& word)
 {
     vector<WordleManager::LetterState> states(this->currentWord.length());
-    string tmpWord(this->currentWord);
+    //string tmpWord(this->currentWord);
     for (int i = 0; i < word.length(); ++i)
     {
-        if (tolower(word[i]) == this->currentWord[i])
+        if (this->currentWord.find(tolower(word[i])) != string::npos)
         {
-            states[i] = LetterState::CORRECT;
-            tmpWord = tmpWord.replace(i, 1, " ");
+            states[i] = WordleManager::LetterState::IN_WORD;
         }
     }
 
     for (int i = 0; i < word.length(); ++i)
     {
-        if (tmpWord.find(tolower(word[i])) != string::npos)
+
+        if (tolower(word[i]) == this->currentWord[i])
         {
-            states[i] = WordleManager::LetterState::IN_WORD;
+            states[i] = LetterState::CORRECT;
+            //tmpWord = tmpWord.replace(i, 1, " ");
         }
     }
+
+
     return states;
 }
 
