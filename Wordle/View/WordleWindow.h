@@ -30,6 +30,7 @@ class WordleWindow : public Fl_Window
 private:
     WordleManager* manager;
     string word;
+    int guessAmount;
     WordleDisplayControl* displayControl;
     WordleKeyboardControl* keyboardControl;
 public:

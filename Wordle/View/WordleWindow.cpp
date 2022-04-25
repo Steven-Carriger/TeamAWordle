@@ -5,6 +5,8 @@
 using namespace std;
 using namespace std::placeholders;
 
+#include <FL/fl_ask.H>
+
 #define PADDING 20
 namespace view
 {
@@ -21,6 +23,7 @@ WordleWindow::WordleWindow(int width, int height, const char* title) : Fl_Window
     this->manager = new WordleManager();
     this->manager->randomizeWord(5);
     this->word = "";
+    this->guessAmount = 0;
 }
 
 void WordleWindow::handleLetterPress(WordleWindow* window, const char* key)
@@ -34,10 +37,24 @@ void WordleWindow::handleLetterPress(WordleWindow* window, const char* key)
 
 void WordleWindow::handleEnterPress(WordleWindow* window)
 {
+    //TODO: Make alerts as labels in the window and add restart abilty.
     if (window->manager->validateWord(window->word))
     {
         window->displayControl->submitWord(window->manager->getDetails(window->word));
+        window->guessAmount++;
+        if (window->manager->guessWord(window->word))
+        {
+            fl_alert("You won!");
+        }
+        cout << window->guessAmount << endl;
+        if (window->guessAmount == 6) {
+            fl_alert("You lose!");
+        }
         window->word = "";
+    }
+    else
+    {
+        fl_alert("Not a valid word.");
     }
 }
 
