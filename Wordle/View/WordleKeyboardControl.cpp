@@ -1,0 +1,151 @@
+#include "WordleKeyboardControl.h"
+
+#define KEYBOARD_GAP 5
+#define NON_LETTER_LENGTH 15
+#define NUM_FIRST_ROW 10
+#define NUM_OTHER_ROW 9
+#define NUM_ROW 3
+
+#include <algorithm>
+#include <iostream>
+using namespace std;
+
+#include "Utils.h"
+
+namespace view
+{
+
+WordleKeyboardControl::WordleKeyboardControl(int x, int y, int width, int height) : Fl_Group(x, y, width, height, nullptr)
+{
+    begin();
+    this->createButtons();
+    end();
+}
+
+WordleKeyboardControl::~WordleKeyboardControl()
+{
+    //dtor
+}
+
+
+
+void WordleKeyboardControl::createButtons()
+{
+    int keySize = min((this->w() - NUM_FIRST_ROW * KEYBOARD_GAP) / NUM_FIRST_ROW, (this->h() - NUM_ROW * KEYBOARD_GAP) / NUM_ROW);
+    int initXFirstRow = this->x() + (this->w() - (NUM_FIRST_ROW - 1) * KEYBOARD_GAP - NUM_FIRST_ROW * keySize) / 2;
+    int initXOtherRow = this->x() + (this->w() - (NUM_OTHER_ROW - 1) * KEYBOARD_GAP - NUM_OTHER_ROW * keySize) / 2;
+    int initY = this->y() + (this->h() - (NUM_ROW - 1) * KEYBOARD_GAP - NUM_ROW * keySize) / 2;
+    vector<const char*> keyLabels = {"Q","W","E","R","T","Y","U","I","O","P","A","S","D","F","G","H","J","K","L","ENTER","Z","X","C","V","B","N","M","BACK"};
+    int row = 0;
+
+    for (int i = 0; i < keyLabels.size(); i++)
+    {
+        int x = initXFirstRow;
+        int colMod = i % NUM_FIRST_ROW;
+        if (i >= NUM_FIRST_ROW)
+        {
+            x = initXOtherRow;
+            colMod = (i - NUM_FIRST_ROW) % NUM_OTHER_ROW;
+            row = (i - NUM_FIRST_ROW) / NUM_OTHER_ROW + 1;
+
+        }
+
+        Fl_Button* newKeyButton;
+        if (keyLabels[i] == "ENTER")
+        {
+            newKeyButton = new Fl_Button(x + colMod * (keySize + KEYBOARD_GAP) - NON_LETTER_LENGTH, initY + row * (keySize + KEYBOARD_GAP), keySize + NON_LETTER_LENGTH, keySize, keyLabels[i]);
+            newKeyButton->callback(handleEnterPress);
+            newKeyButton->shortcut(FL_Enter);
+        }
+        else if (keyLabels[i] == "BACK")
+        {
+            newKeyButton = new Fl_Button(x + colMod * (keySize + KEYBOARD_GAP), initY + row * (keySize + KEYBOARD_GAP), keySize + NON_LETTER_LENGTH, keySize, keyLabels[i]);
+            newKeyButton->callback(handleBackPress);
+            newKeyButton->shortcut(FL_BackSpace);
+        }
+        else
+        {
+            newKeyButton = new Fl_Button(x + colMod * (keySize + KEYBOARD_GAP), initY + row * (keySize + KEYBOARD_GAP), keySize, keySize, keyLabels[i]);
+            newKeyButton->callback(handleLetterPress);
+            newKeyButton->shortcut(tolower(keyLabels[i][0]));
+        }
+
+
+        this->buttons.push_back(newKeyButton);
+    }
+}
+
+void WordleKeyboardControl::setLetterCallback(LetterCallback letterCallback)
+{
+    this->letterCallback = letterCallback;
+}
+
+void WordleKeyboardControl::setEnterCallback(EnterCallback enterCallback)
+{
+    this->enterCallback = enterCallback;
+}
+
+void WordleKeyboardControl::setBackCallback(BackCallback backCallback)
+{
+    this->backCallback = backCallback;
+}
+
+void WordleKeyboardControl::handleLetterPress(Fl_Widget* sender)
+{
+    WordleKeyboardControl* keyboard = (WordleKeyboardControl*) sender->parent();
+    keyboard->letterCallback(sender->label());
+}
+
+void WordleKeyboardControl::handleEnterPress(Fl_Widget* sender)
+{
+    WordleKeyboardControl* keyboard = (WordleKeyboardControl*) sender->parent();
+    keyboard->enterCallback();
+}
+
+void WordleKeyboardControl::handleBackPress(Fl_Widget* sender)
+{
+    WordleKeyboardControl* keyboard = (WordleKeyboardControl*) sender->parent();
+    keyboard->backCallback();
+}
+
+void WordleKeyboardControl::updateKeys(vector<WordleManager::LetterState> wordState, const string& userWord)
+{
+    for (int currIndx = 0; currIndx < userWord.length(); currIndx++)
+    {
+        Fl_Button* button = this->getKeyWithLetter(userWord[currIndx]);
+        if (button != nullptr) {
+            this->setKeyStatus(button, wordState[currIndx]);
+        }
+    }
+    this->redraw();
+}
+
+void WordleKeyboardControl::setKeyStatus(Fl_Button* key, WordleManager::LetterState letterState)
+{
+    switch (letterState)
+    {
+        case WordleManager::LetterState::CORRECT:
+            key->color(FL_GREEN);
+            return;
+        case WordleManager::LetterState::IN_WORD:
+            key->color(FL_YELLOW);
+            return;
+        case WordleManager::LetterState::NOT_IN_WORD:
+            key->color(FL_BLACK);
+            return;
+    }
+}
+
+Fl_Button* WordleKeyboardControl::getKeyWithLetter(const char letter)
+{
+    for (Fl_Button* button : this->buttons)
+    {
+        if (strcmp(button->label(), &letter) == 0)
+        {
+            return button;
+        }
+    }
+    return nullptr;
+}
+
+}

@@ -10,14 +10,35 @@
 #include <FL/Fl_Text_Display.H>
 #include <FL/Fl_Button.H>
 
+#include "string.h"
+#include <ctype.h>
+#include <iostream>
+#include <vector>
+using namespace std;
+
+#include "WordleManager.h"
+using namespace model;
+
+#include "WordleDisplayControl.h"
+#include "WordleKeyboardControl.h"
+
 namespace view
 {
 
 class WordleWindow : public Fl_Window
 {
-    public:
-        WordleWindow(int, int, const char*);
-        virtual ~WordleWindow();
+private:
+    WordleManager* manager;
+    string word;
+    WordleDisplayControl* displayControl;
+    WordleKeyboardControl* keyboardControl;
+public:
+    WordleWindow(int x, int y, const char* title);
+    virtual ~WordleWindow();
+private:
+    static void handleLetterPress(WordleWindow* window, const char* key);
+    static void handleEnterPress(WordleWindow* window);
+    static void handleBackPress(WordleWindow* window);
 };
 }
 #endif // WORDLEWINDOW_H
