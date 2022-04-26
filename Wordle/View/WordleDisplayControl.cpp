@@ -85,7 +85,7 @@ void WordleDisplayControl::submitWord(vector<WordleManager::LetterState> wordSta
         currIndx++;
     }
     this->currWord++;
-    this->guessing = !isAllCorrect || this->currWord == 6;
+    this->guessing = !isAllCorrect && this->currWord != 6;
     this->redraw();
 }
 
