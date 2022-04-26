@@ -76,7 +76,6 @@ bool WordleManager::guessWord(const string& word)
 vector<WordleManager::LetterState> WordleManager::getDetails(const string& word)
 {
     vector<WordleManager::LetterState> states(this->currentWord.length());
-    //string tmpWord(this->currentWord);
     for (int i = 0; i < word.length(); ++i)
     {
         if (this->currentWord.find(tolower(word[i])) != string::npos)
@@ -91,7 +90,6 @@ vector<WordleManager::LetterState> WordleManager::getDetails(const string& word)
         if (tolower(word[i]) == this->currentWord[i])
         {
             states[i] = LetterState::CORRECT;
-            //tmpWord = tmpWord.replace(i, 1, " ");
         }
     }
 

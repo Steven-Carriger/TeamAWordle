@@ -70,7 +70,6 @@ void WordleKeyboardControl::createButtons()
             newKeyButton->shortcut(tolower(keyLabels[i][0]));
         }
 
-
         this->buttons.push_back(newKeyButton);
     }
 }
@@ -113,7 +112,8 @@ void WordleKeyboardControl::updateKeys(vector<WordleManager::LetterState> wordSt
     for (int currIndx = 0; currIndx < userWord.length(); currIndx++)
     {
         Fl_Button* button = this->getKeyWithLetter(userWord[currIndx]);
-        if (button != nullptr) {
+        if (button != nullptr)
+        {
             this->setKeyStatus(button, wordState[currIndx]);
         }
     }
@@ -122,6 +122,10 @@ void WordleKeyboardControl::updateKeys(vector<WordleManager::LetterState> wordSt
 
 void WordleKeyboardControl::setKeyStatus(Fl_Button* key, WordleManager::LetterState letterState)
 {
+    if (key->color() == FL_GREEN)
+    {
+        return;
+    }
     switch (letterState)
     {
         case WordleManager::LetterState::CORRECT:
@@ -131,7 +135,12 @@ void WordleKeyboardControl::setKeyStatus(Fl_Button* key, WordleManager::LetterSt
             key->color(FL_YELLOW);
             return;
         case WordleManager::LetterState::NOT_IN_WORD:
+            if (key->color() != FL_GRAY)
+            {
+                return;
+            }
             key->color(FL_BLACK);
+            key->labelcolor(FL_WHITE);
             return;
     }
 }
@@ -140,7 +149,7 @@ Fl_Button* WordleKeyboardControl::getKeyWithLetter(const char letter)
 {
     for (Fl_Button* button : this->buttons)
     {
-        if (strcmp(button->label(), &letter) == 0)
+        if (toLowerCase(button->label()) == toLowerCase(&letter))
         {
             return button;
         }
