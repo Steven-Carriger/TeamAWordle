@@ -30,6 +30,8 @@
 		<Unit filename="Model/WordleManager.h" />
 		<Unit filename="Utils/Utils.cpp" />
 		<Unit filename="Utils/Utils.h" />
+		<Unit filename="View/StatisticsWindow.cpp" />
+		<Unit filename="View/StatisticsWindow.h" />
 		<Unit filename="View/WordleDisplayControl.cpp" />
 		<Unit filename="View/WordleDisplayControl.h" />
 		<Unit filename="View/WordleKeyboardControl.cpp" />
