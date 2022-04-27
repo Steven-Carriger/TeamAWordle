@@ -21,6 +21,7 @@ using namespace model;
 
 #include "WordleDisplayControl.h"
 #include "WordleKeyboardControl.h"
+#include "StatisticsWindow.h"
 
 namespace view
 {
@@ -32,10 +33,12 @@ private:
     string word;
     WordleDisplayControl* displayControl;
     WordleKeyboardControl* keyboardControl;
+    Fl_Button* statisticsButton;
 public:
     WordleWindow(int x, int y, const char* title);
     virtual ~WordleWindow();
 private:
+    static void cbDisplayUserStats(Fl_Widget* widget, void* window);
     static void handleLetterPress(WordleWindow* window, const char* key);
     static void handleEnterPress(WordleWindow* window);
     static void handleBackPress(WordleWindow* window);
