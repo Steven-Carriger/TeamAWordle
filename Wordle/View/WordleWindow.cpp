@@ -23,6 +23,7 @@ WordleWindow::WordleWindow(int width, int height, const char* title) : Fl_Window
     this->keyboardControl->setEnterCallback(bind(handleEnterPress, this));
     this->keyboardControl->setBackCallback(bind(handleBackPress, this));
     this->manager = new WordleManager();
+    this->statisticsManager = new StatisticsManager("Test");
     this->manager->randomizeWord(WORD_LENGTH);
     this->word = "";
 }
@@ -54,9 +55,10 @@ void WordleWindow::handleBackPress(WordleWindow* window)
     }
 }
 
-void WordleWindow::cbDisplayUserStats(Fl_Widget* widget, void* window)
+void WordleWindow::cbDisplayUserStats(Fl_Widget* widget, void* data)
 {
-    StatisticsWindow stats;
+    WordleWindow* window = (WordleWindow*) data;
+    StatisticsWindow stats(window->statisticsManager);
     stats.show();
 
     while (stats.shown())

@@ -128,20 +128,20 @@ void WordleKeyboardControl::setKeyStatus(Fl_Button* key, WordleManager::LetterSt
     }
     switch (letterState)
     {
-        case WordleManager::LetterState::CORRECT:
-            key->color(FL_GREEN);
+    case WordleManager::LetterState::CORRECT:
+        key->color(FL_GREEN);
+        return;
+    case WordleManager::LetterState::IN_WORD:
+        key->color(FL_YELLOW);
+        return;
+    case WordleManager::LetterState::NOT_IN_WORD:
+        if (key->color() != FL_GRAY)
+        {
             return;
-        case WordleManager::LetterState::IN_WORD:
-            key->color(FL_YELLOW);
-            return;
-        case WordleManager::LetterState::NOT_IN_WORD:
-            if (key->color() != FL_GRAY)
-            {
-                return;
-            }
-            key->color(FL_BLACK);
-            key->labelcolor(FL_WHITE);
-            return;
+        }
+        key->color(FL_BLACK);
+        key->labelcolor(FL_WHITE);
+        return;
     }
 }
 

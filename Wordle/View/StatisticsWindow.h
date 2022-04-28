@@ -6,26 +6,36 @@
 #include <Fl/Fl_Output.H>
 #include <Fl/Fl_Text_Buffer.H>
 #include <Fl/Fl_Text_Display.H>
+
+#include "StatisticsManager.h"
+using namespace model;
+
+#include <string>
+using namespace std;
+
 namespace view
 {
 
 class StatisticsWindow : public Fl_Window
 {
 
-    private:
-        Fl_Button* okButton;
-        Fl_Output* totalGameOutput;
-        Fl_Output* winRateOutput;
-        Fl_Output* winStreakOutput;
-        Fl_Output* highestWinStreakOutput;
-        Fl_Text_Buffer* guessDistributionBuffer;
-        Fl_Text_Display* guessDistributionDisplay;
+private:
+    StatisticsManager* manager;
+    Fl_Button* okButton;
+    Fl_Output* totalGameOutput;
+    Fl_Output* winRateOutput;
+    Fl_Output* winStreakOutput;
+    Fl_Output* highestWinStreakOutput;
+    Fl_Text_Buffer* guessDistributionBuffer;
+    Fl_Text_Display* guessDistributionDisplay;
 
-    public:
-        StatisticsWindow();
-        virtual ~StatisticsWindow();
-        void setOKLocation(int x, int y);
-        static void cbOk(Fl_Widget* widget, void* data);
+    void setDisplayValues(StatisticsManager* manager);
+public:
+    StatisticsWindow(StatisticsManager* manager);
+    virtual ~StatisticsWindow();
+    void setOKLocation(int x, int y);
+    static void cbOk(Fl_Widget* widget, void* data);
+    void setWidgetValues();
 };
 
 }
