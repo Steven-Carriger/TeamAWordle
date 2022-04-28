@@ -5,6 +5,7 @@
 #define WINDOW_TITLE "Your Stats"
 #define BUTTON_WIDTH 70
 #define BUTTON_HEIGHT 30
+#define MAX_GUESS 6
 namespace view
 {
 
@@ -16,9 +17,8 @@ namespace view
 // @param width The width of the window
 // @param height The height of the window
 // @param title The title to display for the window
-StatisticsWindow::StatisticsWindow() : Fl_Window(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE)
+StatisticsWindow::StatisticsWindow(StatisticsManager* manager) : Fl_Window(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE)
 {
-
     begin();
 
     this->okButton = new Fl_Button(WINDOW_WIDTH / 2 - 35, WINDOW_HEIGHT - 45, BUTTON_WIDTH, BUTTON_HEIGHT, "OK");
@@ -34,8 +34,31 @@ StatisticsWindow::StatisticsWindow() : Fl_Window(WINDOW_WIDTH, WINDOW_HEIGHT, WI
     this->guessDistributionDisplay->textfont(FL_COURIER);
     this->guessDistributionDisplay->buffer(this->guessDistributionBuffer);
 
+    this->setDisplayValues(manager);
     end();
 
+}
+
+void StatisticsWindow::setDisplayValues(StatisticsManager* manager)
+{
+    Player* currentPlayer = manager->getCurrentPlayer();
+
+    string totalGames = to_string(currentPlayer->getTotalGames());
+    this->totalGameOutput->value(totalGames.c_str());
+    string winRate = to_string((int)currentPlayer->calculateWinRate()) + "%";
+    this->winRateOutput->value(winRate.c_str());
+    string winStreak = to_string(currentPlayer->getCurrentWinStreak());
+    this->winStreakOutput->value(winStreak.c_str());
+    string highestStreak = to_string(currentPlayer->getHighestWinStreak());
+    this->highestWinStreakOutput->value(highestStreak.c_str());
+
+    string guessDistributionSummary = "Guess Distribution: \n";
+    for (int index = 0; index < MAX_GUESS; index++)
+    {
+        string distributionLine = "On guess " + to_string(index + 1) + ": " +to_string(currentPlayer->getAmountOfGuessesAtIndex(index)) + " times.";
+        guessDistributionSummary += distributionLine + "\n";
+    }
+    this->guessDistributionBuffer->text(guessDistributionSummary.c_str());
 }
 
 // The handler when OK is invoked
