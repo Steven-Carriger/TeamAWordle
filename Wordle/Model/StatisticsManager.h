@@ -3,10 +3,6 @@
 
 #include <map>
 #include <string>
-#include <fstream>
-#include <cstdlib>
-#include <ctime>
-#include <iostream>
 using namespace std;
 
 #include "Utils.h"
@@ -23,13 +19,14 @@ private:
     map<string, Player*> userStats;
     Player* currentPlayer;
     void loadUserData();
-    void setCurrentUser(string userName);
 public:
-    StatisticsManager(string userName);
+    StatisticsManager();
     virtual ~StatisticsManager();
     Player* getCurrentPlayer();
     void saveUserData();
+    void setCurrentUser(string userName);
     void addUser(string userName, Player* user);
+    map<string, Player*>& getUserStats();
 };
 
 }

@@ -22,6 +22,7 @@ using namespace model;
 #include "WordleDisplayControl.h"
 #include "WordleKeyboardControl.h"
 #include "StatisticsWindow.h"
+#include "FileManager.h"
 
 namespace view
 {
@@ -31,6 +32,7 @@ class WordleWindow : public Fl_Window
 private:
     WordleManager* manager;
     StatisticsManager* statisticsManager;
+    FileManager* fileManager;
     string word;
     WordleDisplayControl* displayControl;
     WordleKeyboardControl* keyboardControl;
