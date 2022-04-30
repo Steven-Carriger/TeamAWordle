@@ -26,6 +26,12 @@
 		<Linker>
 			<Add option="`fltk-config --ldstaticflags`" />
 		</Linker>
+		<Unit filename="Model/FileManager.cpp" />
+		<Unit filename="Model/FileManager.h" />
+		<Unit filename="Model/Player.cpp" />
+		<Unit filename="Model/Player.h" />
+		<Unit filename="Model/StatisticsManager.cpp" />
+		<Unit filename="Model/StatisticsManager.h" />
 		<Unit filename="Model/WordleManager.cpp" />
 		<Unit filename="Model/WordleManager.h" />
 		<Unit filename="Utils/Utils.cpp" />
