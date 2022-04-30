@@ -29,8 +29,7 @@ public:
     bool validateWord(const string& word);
     bool guessWord(const string& word);
     vector<WordleManager::LetterState> getDetails(const string& word);
-private:
-    void load();
+    vector<string>& getDictionary();
 };
 
 };
