@@ -13,7 +13,6 @@ namespace model
 
 WordleManager::WordleManager()
 {
-    this->load();
     srand((int) time(0));
 }
 
@@ -22,26 +21,14 @@ WordleManager::~WordleManager()
     //dtor
 }
 
-void WordleManager::load()
-{
-    const string& dictionaryFile = "dictionary.txt";
-    ifstream inputFile (dictionaryFile);
-    if (inputFile.is_open())
-    {
-        string line;
-        while ( getline (inputFile,line) )
-        {
-            line.pop_back();
-            this->dictionary.push_back(line);
-        }
-        inputFile.close();
-    }
-    else throw runtime_error("Failed to load dictionary.");
-}
-
 const string& WordleManager::getCurrentWord()
 {
     return this->currentWord;
+}
+
+vector<string>& WordleManager::getDictionary()
+{
+    return this->dictionary;
 }
 
 void WordleManager::randomizeWord(int wordLength)
