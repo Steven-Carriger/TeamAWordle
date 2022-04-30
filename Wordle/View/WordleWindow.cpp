@@ -8,6 +8,7 @@ using namespace std::placeholders;
 #define PADDING 20
 #define GUESS_LIMIT 6
 #define WORD_LENGTH 5
+#define BUTTON_HEIGHT 25
 namespace view
 {
 
@@ -16,23 +17,18 @@ WordleWindow::WordleWindow(int width, int height, const char* title) : Fl_Window
     begin();
     this->displayControl = new WordleDisplayControl(PADDING, PADDING, width - 2 * PADDING, (height - PADDING) / 2, GUESS_LIMIT, WORD_LENGTH);
     this->keyboardControl = new WordleKeyboardControl(PADDING, (height - PADDING) / 2, width - 2 * PADDING, height / 2);
-    this->statisticsButton = new Fl_Button(450, PADDING, 50, 25, "Stats");
+
+    this->saveButton = new Fl_Button(440, PADDING, 60, BUTTON_HEIGHT, "Save");
+    this->settingsButton = new Fl_Button(440, PADDING + BUTTON_HEIGHT, 60, BUTTON_HEIGHT, "Settings");
+    this->statisticsButton = new Fl_Button(440, PADDING + BUTTON_HEIGHT + BUTTON_HEIGHT, 60, BUTTON_HEIGHT, "Stats");
+    this->saveButton->callback(cbSaveUserStats, this);
+    this->settingsButton->callback(cbDisplaySettings, this);
     this->statisticsButton->callback(cbDisplayUserStats, this);
+
+    this->isReuseAllowed = false;
+    this->setUpKeyboardHandlers();
+    this->setUpManagers();
     end();
-    this->keyboardControl->setLetterCallback(bind(handleLetterPress, this, _1));
-    this->keyboardControl->setEnterCallback(bind(handleEnterPress, this));
-    this->keyboardControl->setBackCallback(bind(handleBackPress, this));
-    this->manager = new WordleManager();
-    string test = "Jerry";
-    this->statisticsManager = new StatisticsManager();
-    this->fileManager = new FileManager();
-
-    this->fileManager->loadDictionary(manager);
-    this->fileManager->loadUserData(this->statisticsManager);
-
-    this->statisticsManager->setCurrentUser(test);
-    this->manager->randomizeWord(WORD_LENGTH);
-    this->word = "";
 }
 
 void WordleWindow::handleLetterPress(WordleWindow* window, const char* key)
@@ -73,6 +69,47 @@ void WordleWindow::cbDisplayUserStats(Fl_Widget* widget, void* data)
         Fl::wait();
     }
 
+}
+
+void WordleWindow::cbSaveUserStats(Fl_Widget* widget, void* data)
+{
+    WordleWindow* window = (WordleWindow*) data;
+    window->fileManager->saveUserData(window->statisticsManager);
+}
+
+void WordleWindow::cbDisplaySettings(Fl_Widget* widget, void* data)
+{
+    WordleWindow* window = (WordleWindow*) data;
+    SettingsWindow settings(window->isReuseAllowed);
+    settings.show();
+
+    while (settings.shown())
+    {
+        Fl::wait();
+    }
+    window->isReuseAllowed = settings.isReuseAllowed();
+}
+
+void WordleWindow::setUpKeyboardHandlers()
+{
+    this->keyboardControl->setLetterCallback(bind(handleLetterPress, this, _1));
+    this->keyboardControl->setEnterCallback(bind(handleEnterPress, this));
+    this->keyboardControl->setBackCallback(bind(handleBackPress, this));
+}
+
+void WordleWindow::setUpManagers()
+{
+    this->manager = new WordleManager();
+    this->statisticsManager = new StatisticsManager();
+    this->fileManager = new FileManager();
+
+    this->fileManager->loadDictionary(this->manager);
+    this->fileManager->loadUserData(this->statisticsManager);
+
+    string test = "Alexander";
+    this->statisticsManager->setCurrentUser(test);
+    this->manager->randomizeWord(WORD_LENGTH);
+    this->word = "";
 }
 
 WordleWindow::~WordleWindow()

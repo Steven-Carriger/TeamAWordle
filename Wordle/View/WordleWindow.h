@@ -22,6 +22,7 @@ using namespace model;
 #include "WordleDisplayControl.h"
 #include "WordleKeyboardControl.h"
 #include "StatisticsWindow.h"
+#include "SettingsWindow.h"
 #include "FileManager.h"
 
 namespace view
@@ -34,14 +35,21 @@ private:
     StatisticsManager* statisticsManager;
     FileManager* fileManager;
     string word;
+    bool isReuseAllowed;
     WordleDisplayControl* displayControl;
     WordleKeyboardControl* keyboardControl;
+    Fl_Button* saveButton;
+    Fl_Button* settingsButton;
     Fl_Button* statisticsButton;
+    void setUpKeyboardHandlers();
+    void setUpManagers();
 public:
     WordleWindow(int x, int y, const char* title);
     virtual ~WordleWindow();
 private:
-    static void cbDisplayUserStats(Fl_Widget* widget, void* window);
+    static void cbDisplayUserStats(Fl_Widget* widget, void* data);
+    static void cbSaveUserStats(Fl_Widget* widget, void* data);
+    static void cbDisplaySettings(Fl_Widget* widget, void* data);
     static void handleLetterPress(WordleWindow* window, const char* key);
     static void handleEnterPress(WordleWindow* window);
     static void handleBackPress(WordleWindow* window);
