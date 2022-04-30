@@ -25,7 +25,6 @@ void StatisticsManager::setCurrentUser(string userName)
         this->currentPlayer = new Player();
         this->currentPlayer->setUserName(toLowerCase(userName));
         this->userStats[toLowerCase(userName)] = this->currentPlayer;
-        cout << this->userStats.size() << endl;
         return;
     }
     this->currentPlayer = this->userStats[toLowerCase(userName)];

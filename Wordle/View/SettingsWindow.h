@@ -4,7 +4,7 @@
 #include <Fl/Fl_Window.H>
 #include <Fl/Fl_Button.H>
 #include <Fl/Fl_Check_Button.H>
-#include <iostream>
+
 #include <string>
 using namespace std;
 
