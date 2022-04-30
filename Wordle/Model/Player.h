@@ -32,6 +32,7 @@ public:
     void setTotalGames(int numberOfGames);
     void setTotalWins(int numberOfWins);
     void setCurrentWinStreak(int streakNumber);
+    void setHighestWinStreak(int highestStreak);
     void setGuessCountAtIndex(int index, int guessCount);
 
     float calculateWinRate();

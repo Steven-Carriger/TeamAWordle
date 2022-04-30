@@ -58,7 +58,16 @@ void Player::setTotalWins(int numberOfWins)
 
 void Player::setCurrentWinStreak(int streakNumber)
 {
+    if (streakNumber > this->highestWinStreak)
+    {
+        this->setHighestWinStreak(streakNumber);
+    }
     this->currentWinStreak = streakNumber;
+}
+
+void Player::setHighestWinStreak(int highestStreak)
+{
+    this->highestWinStreak = highestStreak;
 }
 
 void Player::setGuessCountAtIndex(int index, int guessCount)

@@ -23,9 +23,11 @@ WordleWindow::WordleWindow(int width, int height, const char* title) : Fl_Window
     this->keyboardControl->setEnterCallback(bind(handleEnterPress, this));
     this->keyboardControl->setBackCallback(bind(handleBackPress, this));
     this->manager = new WordleManager();
-    this->statisticsManager = new StatisticsManager("Test");
+    string test = "Jerry";
+    this->statisticsManager = new StatisticsManager(test);
     this->manager->randomizeWord(WORD_LENGTH);
     this->word = "";
+        this->statisticsManager->saveUserData();
 }
 
 void WordleWindow::handleLetterPress(WordleWindow* window, const char* key)

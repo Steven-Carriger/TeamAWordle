@@ -5,6 +5,9 @@
 #include <vector>
 using namespace std;
 
+#include "Utils.h"
+using namespace utils;
+
 namespace model
 {
 
