@@ -23,6 +23,7 @@ using namespace model;
 #include "WordleKeyboardControl.h"
 #include "StatisticsWindow.h"
 #include "SettingsWindow.h"
+#include "LoginWindow.h"
 #include "FileManager.h"
 
 namespace view
@@ -43,6 +44,8 @@ private:
     Fl_Button* statisticsButton;
     void setUpKeyboardHandlers();
     void setUpManagers();
+    void setUpButtons();
+    string displayUserLogin();
 public:
     WordleWindow(int x, int y, const char* title);
     virtual ~WordleWindow();

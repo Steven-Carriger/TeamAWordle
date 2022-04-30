@@ -17,16 +17,9 @@ WordleWindow::WordleWindow(int width, int height, const char* title) : Fl_Window
     begin();
     this->displayControl = new WordleDisplayControl(PADDING, PADDING, width - 2 * PADDING, (height - PADDING) / 2, GUESS_LIMIT, WORD_LENGTH);
     this->keyboardControl = new WordleKeyboardControl(PADDING, (height - PADDING) / 2, width - 2 * PADDING, height / 2);
-
-    this->saveButton = new Fl_Button(440, PADDING, 60, BUTTON_HEIGHT, "Save");
-    this->settingsButton = new Fl_Button(440, PADDING + BUTTON_HEIGHT, 60, BUTTON_HEIGHT, "Settings");
-    this->statisticsButton = new Fl_Button(440, PADDING + BUTTON_HEIGHT + BUTTON_HEIGHT, 60, BUTTON_HEIGHT, "Stats");
-    this->saveButton->callback(cbSaveUserStats, this);
-    this->settingsButton->callback(cbDisplaySettings, this);
-    this->statisticsButton->callback(cbDisplayUserStats, this);
-
     this->isReuseAllowed = false;
     this->setUpKeyboardHandlers();
+    this->setUpButtons();
     this->setUpManagers();
     end();
 }
@@ -38,7 +31,6 @@ void WordleWindow::handleLetterPress(WordleWindow* window, const char* key)
         window->word.append(key);
     }
 }
-
 
 void WordleWindow::handleEnterPress(WordleWindow* window)
 {
@@ -68,7 +60,6 @@ void WordleWindow::cbDisplayUserStats(Fl_Widget* widget, void* data)
     {
         Fl::wait();
     }
-
 }
 
 void WordleWindow::cbSaveUserStats(Fl_Widget* widget, void* data)
@@ -90,6 +81,19 @@ void WordleWindow::cbDisplaySettings(Fl_Widget* widget, void* data)
     window->isReuseAllowed = settings.isReuseAllowed();
 }
 
+string WordleWindow::displayUserLogin()
+{
+    LoginWindow loginWindow;
+    loginWindow.show();
+
+    while (loginWindow.shown())
+    {
+        Fl::wait();
+    }
+
+    return loginWindow.getUserName();
+}
+
 void WordleWindow::setUpKeyboardHandlers()
 {
     this->keyboardControl->setLetterCallback(bind(handleLetterPress, this, _1));
@@ -106,10 +110,20 @@ void WordleWindow::setUpManagers()
     this->fileManager->loadDictionary(this->manager);
     this->fileManager->loadUserData(this->statisticsManager);
 
-    string test = "Alexander";
-    this->statisticsManager->setCurrentUser(test);
+    this->statisticsManager->setCurrentUser(this->displayUserLogin());
     this->manager->randomizeWord(WORD_LENGTH);
     this->word = "";
+}
+
+void WordleWindow::setUpButtons()
+{
+    this->saveButton = new Fl_Button(440, PADDING, 60, BUTTON_HEIGHT, "Save");
+    this->settingsButton = new Fl_Button(440, PADDING + BUTTON_HEIGHT, 60, BUTTON_HEIGHT, "Settings");
+    this->statisticsButton = new Fl_Button(440, PADDING + BUTTON_HEIGHT + BUTTON_HEIGHT, 60, BUTTON_HEIGHT, "Stats");
+
+    this->saveButton->callback(cbSaveUserStats, this);
+    this->settingsButton->callback(cbDisplaySettings, this);
+    this->statisticsButton->callback(cbDisplayUserStats, this);
 }
 
 WordleWindow::~WordleWindow()
