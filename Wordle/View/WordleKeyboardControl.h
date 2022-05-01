@@ -35,6 +35,7 @@ public:
     void setEnterCallback(EnterCallback callback);
     void setBackCallback(BackCallback callback);
     void updateKeys(vector<WordleManager::LetterState> wordState, const string& userWord);
+    void clean();
 private:
     void createButtons();
     void setKeyStatus(Fl_Button* key, WordleManager::LetterState letterState);

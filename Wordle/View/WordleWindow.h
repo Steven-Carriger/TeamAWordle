@@ -42,10 +42,11 @@ private:
     Fl_Button* saveButton;
     Fl_Button* settingsButton;
     Fl_Button* statisticsButton;
-    void setUpKeyboardHandlers();
+    void setUpHandlers();
     void setUpManagers();
     void setUpButtons();
     string displayUserLogin();
+    void restart();
 public:
     WordleWindow(int x, int y, const char* title);
     virtual ~WordleWindow();
@@ -55,6 +56,8 @@ private:
     static void cbDisplaySettings(Fl_Widget* widget, void* data);
     static void handleLetterPress(WordleWindow* window, const char* key);
     static void handleEnterPress(WordleWindow* window);
+    static void handleWin(WordleWindow* window, int wordCount);
+    static void handleLoss(WordleWindow* window);
     static void handleBackPress(WordleWindow* window);
 };
 }

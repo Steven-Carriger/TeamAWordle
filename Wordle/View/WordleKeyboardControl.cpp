@@ -157,4 +157,14 @@ Fl_Button* WordleKeyboardControl::getKeyWithLetter(const char letter)
     return nullptr;
 }
 
+void WordleKeyboardControl::clean()
+{
+    for (Fl_Button* button : this->buttons)
+    {
+        button->color(FL_GRAY);
+        button->labelcolor(FL_BLACK);
+    }
+    this->redraw();
+}
+
 }

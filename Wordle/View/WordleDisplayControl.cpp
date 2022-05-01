@@ -28,6 +28,16 @@ WordleDisplayControl::~WordleDisplayControl()
     //dtor
 }
 
+void WordleDisplayControl::setLossCallback(LossCallback callback)
+{
+    this->lossCallback = callback;
+}
+
+void WordleDisplayControl::setWinCallback(WinCallback callback)
+{
+    this->winCallback = callback;
+}
+
 void WordleDisplayControl::createGrid()
 {
     int boxSize = min((this->w() - (this->wordLength - 1) * DISPLAY_GAP) / this->wordLength, (this->h() - (this->guessLimit - 1) * DISPLAY_GAP)/ this->guessLimit);
@@ -43,6 +53,7 @@ bool WordleDisplayControl::addLetter(const char* letter)
 {
     if (this->guessing && this->currLetter < this->wordLength * (this->currWord + 1))
     {
+
         this->child(this->currLetter)->label(letter);
         this->currLetter++;
         return true;
@@ -79,7 +90,8 @@ void WordleDisplayControl::submitWord(vector<WordleManager::LetterState> wordSta
         }
         else if (*aState == WordleManager::LetterState::NOT_IN_WORD)
         {
-            this->child(currIndx)->color(FL_GRAY);
+            this->child(currIndx)->color(FL_BLACK);
+            this->child(currIndx)->labelcolor(FL_WHITE);
             isAllCorrect = false;
         }
         currIndx++;
@@ -87,6 +99,21 @@ void WordleDisplayControl::submitWord(vector<WordleManager::LetterState> wordSta
     this->currWord++;
     this->guessing = !isAllCorrect && this->currWord != 6;
     this->redraw();
+    if (isAllCorrect) this->winCallback(this->currWord);
+    if (this->currWord == 6) this->lossCallback();
+}
+
+void WordleDisplayControl::clean()
+{
+    this->currLetter = 0;
+    this->currWord = 0;
+    this->guessing = true;
+    for (int i = 0; i < guessLimit * wordLength; i++)
+    {
+        this->child(i)->label(nullptr);
+        this->child(i)->color(FL_GRAY);
+        this->child(i)->labelcolor(FL_BLACK);
+    }
 }
 
 }
