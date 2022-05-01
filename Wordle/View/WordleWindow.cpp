@@ -36,7 +36,7 @@ void WordleWindow::handleEnterPress(WordleWindow* window)
 {
     if (window->manager->validateWord(window->word))
     {
-        window->displayControl->submitWord(window->manager->getDetails(window->word));
+        window->displayControl->submitWord(window->manager->getDetails(window->word), window->statisticsManager);
         window->keyboardControl->updateKeys(window->manager->getDetails(window->word), window->word);
         window->word = "";
     }

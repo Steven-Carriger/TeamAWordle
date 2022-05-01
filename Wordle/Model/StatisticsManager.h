@@ -27,6 +27,7 @@ public:
     void setCurrentUser(string userName);
     void addUser(string userName, Player* user);
     map<string, Player*>& getUserStats();
+    void increasePlayersStats(bool didWin, int timesGuessed);
 };
 
 }
