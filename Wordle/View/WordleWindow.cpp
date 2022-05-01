@@ -12,6 +12,13 @@ using namespace std::placeholders;
 namespace view
 {
 
+/**
+* Creates a new WordleWindow
+*
+* @param width the width of the window
+* @param height the height of the window
+* @param title the title of the window
+*/
 WordleWindow::WordleWindow(int width, int height, const char* title) : Fl_Window(width, height, title)
 {
     begin();
@@ -126,6 +133,9 @@ void WordleWindow::setUpButtons()
     this->statisticsButton->callback(cbDisplayUserStats, this);
 }
 
+/**
+* WordleWindow deconstructor
+*/
 WordleWindow::~WordleWindow()
 {
 }

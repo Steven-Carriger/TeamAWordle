@@ -8,6 +8,11 @@
 namespace view
 {
 
+/**
+* Creates a new SettingsWindow
+*
+* @param setting the setting to set by value
+*/
 SettingsWindow::SettingsWindow(bool setting) : Fl_Window(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE)
 {
     begin();
@@ -19,17 +24,31 @@ SettingsWindow::SettingsWindow(bool setting) : Fl_Window(WINDOW_WIDTH, WINDOW_HE
     end();
 }
 
+/**
+* The event handler for when the ok button is clicked
+*
+* @param widget the button that was invoked
+* @param data the window or group that contains the button invoked
+*/
 void SettingsWindow::cbOk(Fl_Widget* widget, void* data)
 {
     SettingsWindow* window = (SettingsWindow*)data;
     window->hide();
 }
 
+/**
+* gets if the reuse of letters is allowed or not
+*
+* @return true if reuse is allowed, false otherwise
+*/
 bool SettingsWindow::isReuseAllowed()
 {
     return this->allowReuseButton->value();
 }
 
+/**
+* Settings Window deconstructor
+*/
 SettingsWindow::~SettingsWindow()
 {
     //dtor

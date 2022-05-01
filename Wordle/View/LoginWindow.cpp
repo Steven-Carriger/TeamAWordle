@@ -8,6 +8,9 @@
 namespace view
 {
 
+/**
+* Creates a new Login Window
+*/
 LoginWindow::LoginWindow() : Fl_Window(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE)
 {
     this->loginButton = new Fl_Button(WINDOW_WIDTH / 2 - 35, WINDOW_HEIGHT - 45, BUTTON_WIDTH, BUTTON_HEIGHT, "Login");
@@ -25,11 +28,19 @@ void LoginWindow::cbLogin(Fl_Widget* widget, void* data)
     window->hide();
 }
 
+/**
+* gets the user name that was entered
+*
+* @return the user name entered
+*/
 string LoginWindow::getUserName()
 {
     return this->userNameInput->value();
 }
 
+/**
+* This is a Login Window Deconstructor
+*/
 LoginWindow::~LoginWindow()
 {
     //dtor
