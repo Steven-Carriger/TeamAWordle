@@ -9,14 +9,6 @@
 namespace view
 {
 
-// Constructs a statistics window creating and initializing all the widgets that will be displayed
-//
-// @precondition width > 0 AND height > 0
-// @postcondition none
-//
-// @param width The width of the window
-// @param height The height of the window
-// @param title The title to display for the window
 StatisticsWindow::StatisticsWindow(StatisticsManager* manager) : Fl_Window(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE)
 {
     begin();
@@ -61,23 +53,26 @@ void StatisticsWindow::setDisplayValues(StatisticsManager* manager)
     this->guessDistributionBuffer->text(guessDistributionSummary.c_str());
 }
 
-// The handler when OK is invoked
 void StatisticsWindow::cbOk(Fl_Widget* widget, void* data)
 {
     StatisticsWindow* window = (StatisticsWindow*)data;
     window->hide();
 }
 
-// Sets the (x,y) location of the OK button
-//
-// @precondition none
-// @postcondition none
+/**
+* Sets the (x,y) location of the OK button
+*
+* @precondition none
+* @postcondition none
+*/
 void StatisticsWindow::setOKLocation(int x, int y)
 {
     this->okButton->position(x, y);
 }
 
-// Destructor that cleans up all allocated resources for the window
+/**
+* Destructor that cleans up all allocated resources for the window
+*/
 StatisticsWindow::~StatisticsWindow()
 {
     delete this->okButton;
