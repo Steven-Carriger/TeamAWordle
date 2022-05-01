@@ -11,6 +11,16 @@ using namespace std;
 namespace view
 {
 
+/**
+* Creates a new WordleDisplayControl
+*
+* @param x the x value of the control
+* @param y the y value of the control
+* @param width the width of the control
+* @param height the height of the control
+* @param guessLimit the guessLimit for the display
+* @param wordLength the wordLength of the words to display
+*/
 WordleDisplayControl::WordleDisplayControl(int x, int y, int width, int height, int guessLimit, int wordLength)  : Fl_Group(x, y, width, height, nullptr)
 {
     this->currLetter = 0;
@@ -23,6 +33,9 @@ WordleDisplayControl::WordleDisplayControl(int x, int y, int width, int height, 
     end();
 }
 
+/**
+* WordleDisplayControl deconstructor
+*/
 WordleDisplayControl::~WordleDisplayControl()
 {
     //dtor
@@ -39,6 +52,13 @@ void WordleDisplayControl::createGrid()
     }
 }
 
+/**
+* Adds a letter to the display
+*
+* @param letter the letter to add
+*
+* @return true if the letter is added, false otherwise
+*/
 bool WordleDisplayControl::addLetter(const char* letter)
 {
     if (this->guessing && this->currLetter < this->wordLength * (this->currWord + 1))
@@ -50,6 +70,11 @@ bool WordleDisplayControl::addLetter(const char* letter)
     return false;
 }
 
+/**
+* Removes the most recently added letter
+*
+* @return true if a letter is removed, false otherwise
+*/
 bool WordleDisplayControl::removeLetter()
 {
     if (this->guessing && this->currWord * this->wordLength <= this->currLetter - 1 )
@@ -61,6 +86,12 @@ bool WordleDisplayControl::removeLetter()
     return false;
 }
 
+/**
+* Submits the word to this display
+*
+* @param wordState the states of the letters to determine how to display them
+* @param statsManager the manager to use if the game is finishes after this word is submitted
+*/
 void WordleDisplayControl::submitWord(vector<WordleManager::LetterState> wordState, StatisticsManager* statsManager)
 {
     if (!this->guessing || this->currLetter == 0 || this->currLetter % this->wordLength != 0) return;

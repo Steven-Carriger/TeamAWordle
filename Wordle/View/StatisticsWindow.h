@@ -33,7 +33,6 @@ private:
 public:
     StatisticsWindow(StatisticsManager* manager);
     virtual ~StatisticsWindow();
-    void setOKLocation(int x, int y);
     static void cbOk(Fl_Widget* widget, void* data);
     void setWidgetValues();
 };

@@ -3,11 +3,19 @@
 namespace model
 {
 
+/**
+* Creates a new File Manager object
+*/
 FileManager::FileManager()
 {
     //ctor
 }
 
+/**
+* Loads the dictionary for the provided WordleManager
+*
+* @param manager: the WordleManager to provide the words to
+*/
 void FileManager::loadDictionary(WordleManager* manager)
 {
     const string& dictionaryFile = "dictionary.txt";
@@ -25,6 +33,11 @@ void FileManager::loadDictionary(WordleManager* manager)
     else throw runtime_error("Failed to load dictionary.");
 }
 
+/**
+* Loads all of the user data for the specified StatisticsManager
+*
+* @param manager: the StatisticsManager to provide the data to
+*/
 void FileManager::loadUserData(StatisticsManager* manager)
 {
     ifstream inputFile("userStats.csv");
@@ -55,6 +68,11 @@ void FileManager::loadUserData(StatisticsManager* manager)
     inputFile.close();
 }
 
+/**
+* Saves the specified StatisticsManager's information to a file
+*
+* @param manager: the StatisticsManager to extract the information from
+*/
 void FileManager::saveUserData(StatisticsManager* manager)
 {
     ofstream saveFile;
@@ -85,6 +103,9 @@ void FileManager::saveUserData(StatisticsManager* manager)
     saveFile.close();
 }
 
+/**
+* This is a deconstructor for the FileManager
+*/
 FileManager::~FileManager()
 {
     //dtor
