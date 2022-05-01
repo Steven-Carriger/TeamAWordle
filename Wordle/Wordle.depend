@@ -5,7 +5,7 @@
 	<FL/Fl_Box.H>
 	"WordleWindow.h"
 
-1651346610 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/View/WordleWindow.cpp
+1651419533 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/View/WordleWindow.cpp
 	"WordleWindow.h"
 	<iostream>
 	<functional>
@@ -111,9 +111,10 @@
 	<vector>
 	"Utils.h"
 
-1651329527 /home/scarrig1/Desktop/TeamAWordle/Wordle/View/WordleDisplayControl.h
+1651419146 /home/scarrig1/Desktop/TeamAWordle/Wordle/View/WordleDisplayControl.h
 	<string>
 	"WordleManager.h"
+	"StatisticsManager.h"
 	<FL/Fl_Group.H>
 	<FL/Fl_Box.H>
 
@@ -145,7 +146,7 @@
 	"Utils.h"
 	<algorithm>
 
-1651329527 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/View/WordleDisplayControl.cpp
+1651420441 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/View/WordleDisplayControl.cpp
 	"WordleDisplayControl.h"
 	<algorithm>
 	<iostream>
@@ -157,7 +158,7 @@
 	<iostream>
 	"Utils.h"
 
-1651329527 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/View/StatisticsWindow.cpp
+1651419017 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/View/StatisticsWindow.cpp
 	"StatisticsWindow.h"
 
 1651329527 /home/scarrig1/Desktop/TeamAWordle/Wordle/View/StatisticsWindow.h
@@ -169,10 +170,10 @@
 	"StatisticsManager.h"
 	<string>
 
-1651346640 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/Model/StatisticsManager.cpp
+1651420988 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/Model/StatisticsManager.cpp
 	"StatisticsManager.h"
 
-1651329527 /home/scarrig1/Desktop/TeamAWordle/Wordle/Model/StatisticsManager.h
+1651419433 /home/scarrig1/Desktop/TeamAWordle/Wordle/Model/StatisticsManager.h
 	<map>
 	<string>
 	"Utils.h"

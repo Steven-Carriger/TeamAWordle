@@ -30,6 +30,21 @@ void StatisticsManager::setCurrentUser(string userName)
     this->currentPlayer = this->userStats[toLowerCase(userName)];
 }
 
+void StatisticsManager::increasePlayersStats(bool didWin, int timesGuessed)
+{
+    if (didWin)
+    {
+        this->currentPlayer->setCurrentWinStreak(this->currentPlayer->getCurrentWinStreak() + 1);
+        this->currentPlayer->setTotalWins(this->currentPlayer->getTotalWins() + 1);
+        this->currentPlayer->setGuessCountAtIndex(timesGuessed - 1, this->currentPlayer->getAmountOfGuessesAtIndex(timesGuessed - 1) + 1);
+    }
+    else
+    {
+        this->currentPlayer->setCurrentWinStreak(0);
+    }
+    this->currentPlayer->setTotalGames(this->currentPlayer->getTotalGames() + 1);
+}
+
 StatisticsManager::~StatisticsManager()
 {
     //dtor

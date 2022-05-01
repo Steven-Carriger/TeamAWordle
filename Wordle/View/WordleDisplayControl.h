@@ -5,6 +5,7 @@
 using namespace std;
 
 #include "WordleManager.h"
+#include "StatisticsManager.h"
 using namespace model;
 
 #include <FL/Fl_Group.H>
@@ -28,7 +29,7 @@ public:
     virtual ~WordleDisplayControl();
     bool addLetter(const char* letter);
     bool removeLetter();
-    void submitWord(vector<WordleManager::LetterState> wordState);
+    void submitWord(vector<WordleManager::LetterState> wordState, StatisticsManager* statsManager);
 private:
     void createGrid();
 };

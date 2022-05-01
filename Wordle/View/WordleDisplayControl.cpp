@@ -61,7 +61,7 @@ bool WordleDisplayControl::removeLetter()
     return false;
 }
 
-void WordleDisplayControl::submitWord(vector<WordleManager::LetterState> wordState)
+void WordleDisplayControl::submitWord(vector<WordleManager::LetterState> wordState, StatisticsManager* statsManager)
 {
     if (!this->guessing || this->currLetter == 0 || this->currLetter % this->wordLength != 0) return;
     int currIndx = this->currWord * this->wordLength;
@@ -87,6 +87,10 @@ void WordleDisplayControl::submitWord(vector<WordleManager::LetterState> wordSta
     this->currWord++;
     this->guessing = !isAllCorrect && this->currWord != 6;
     this->redraw();
+    if (!this->guessing)
+    {
+        statsManager->increasePlayersStats(isAllCorrect, this->currWord);
+    }
 }
 
 }
