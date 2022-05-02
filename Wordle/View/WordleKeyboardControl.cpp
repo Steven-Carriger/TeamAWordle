@@ -1,11 +1,5 @@
 #include "WordleKeyboardControl.h"
 
-#define KEYBOARD_GAP 5
-#define NON_LETTER_LENGTH 15
-#define NUM_FIRST_ROW 10
-#define NUM_OTHER_ROW 9
-#define NUM_ROW 3
-
 #include <algorithm>
 #include <iostream>
 using namespace std;

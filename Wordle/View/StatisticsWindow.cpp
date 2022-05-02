@@ -1,11 +1,5 @@
 #include "StatisticsWindow.h"
 
-#define WINDOW_WIDTH 400
-#define WINDOW_HEIGHT 300
-#define WINDOW_TITLE "Your Stats"
-#define BUTTON_WIDTH 70
-#define BUTTON_HEIGHT 30
-#define MAX_GUESS 6
 namespace view
 {
 
@@ -18,16 +12,16 @@ StatisticsWindow::StatisticsWindow(StatisticsManager* manager) : Fl_Window(WINDO
 {
     begin();
 
-    this->okButton = new Fl_Button(WINDOW_WIDTH / 2 - 35, WINDOW_HEIGHT - 45, BUTTON_WIDTH, BUTTON_HEIGHT, "OK");
+    this->okButton = new Fl_Button(OK_BUTTON_X, OK_BUTTON_Y, STATS_BUTTON_WIDTH, STATS_BUTTON_HEIGHT, "OK");
     this->okButton->callback(cbOk, this);
 
-    this->totalGameOutput = new Fl_Output(275, 0, 50, 20, "Your total game(s) are: ");
-    this->winRateOutput = new Fl_Output(225, 25, 50, 20, "Your win rate is: ");
-    this->winStreakOutput = new Fl_Output(240, 50, 50, 20, "Your win streak is: ");
-    this->highestWinStreakOutput = new Fl_Output(295, 75, 50, 20, "Your highest win streak is: ");
+    this->totalGameOutput = new Fl_Output(TOTAL_GAME_X, TOTAL_GAME_Y, OUTPUT_WIDTH, OUTPUT_HEIGHT, "Your total game(s) are: ");
+    this->winRateOutput = new Fl_Output(WINRATE_X, WINRATE_Y, OUTPUT_WIDTH, OUTPUT_HEIGHT, "Your win rate is: ");
+    this->winStreakOutput = new Fl_Output(WINSTREAK_X, WINSTREAK_Y, OUTPUT_WIDTH, OUTPUT_HEIGHT, "Your win streak is: ");
+    this->highestWinStreakOutput = new Fl_Output(HIGHEST_STREAK_X, HIGHEST_STREAK_Y, OUTPUT_WIDTH, OUTPUT_HEIGHT, "Your highest win streak is: ");
 
     this->guessDistributionBuffer = new Fl_Text_Buffer();
-    this->guessDistributionDisplay = new Fl_Text_Display(WINDOW_WIDTH / 2 - 100, 100, 200, 150);
+    this->guessDistributionDisplay = new Fl_Text_Display(DISPLAY_TEXT_POSITION, DISPLAY_TEXT_POSITION, DISPLAY_TEXT_WIDTH, DISPLAY_TEXT_HEIGHT);
     this->guessDistributionDisplay->textfont(FL_COURIER);
     this->guessDistributionDisplay->buffer(this->guessDistributionBuffer);
 
@@ -52,7 +46,7 @@ void StatisticsWindow::setDisplayValues(StatisticsManager* manager)
     string guessDistributionSummary = "Guess Distribution: \n";
     for (int index = 0; index < MAX_GUESS; index++)
     {
-        string distributionLine = "On guess " + to_string(index + 1) + ": " +to_string(currentPlayer->getAmountOfGuessesAtIndex(index)) + " times.";
+        string distributionLine = "On guess " + to_string(index + INDEX_VALUE) + ": " +to_string(currentPlayer->getAmountOfGuessesAtIndex(index)) + " times.";
         guessDistributionSummary += distributionLine + "\n";
     }
     this->guessDistributionBuffer->text(guessDistributionSummary.c_str());
