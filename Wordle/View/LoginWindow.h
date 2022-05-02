@@ -8,6 +8,16 @@
 #include <string>
 using namespace std;
 
+#define WINDOW_WIDTH 400
+#define WINDOW_HEIGHT 300
+#define LOGIN_TITLE "Login"
+#define LOGIN_BUTTON_WIDTH 70
+#define LOGIN_BUTTON_HEIGHT 30
+#define LOGIN_BUTTON_X 165
+#define LOGIN_BUTTON_Y 255
+#define INPUT_X 260
+#define INPUT_Y 100
+#define EMPTY_STRING " "
 namespace view
 {
 

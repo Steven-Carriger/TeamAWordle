@@ -8,6 +8,16 @@
 #include <string>
 using namespace std;
 
+#define WINDOW_WIDTH 400
+#define WINDOW_HEIGHT 300
+#define SETTINGS_TITLE "Settings"
+#define SETTINGS_BUTTON_WIDTH 70
+#define SETTINGS_BUTTON_HEIGHT 30
+#define SETTINGS_BUTTON_X 165
+#define SETTINGS_BUTTON_Y 255
+#define REUSE_BUTTON_X 130
+#define REUSE_BUTTON_Y 100
+#define REUSE_WIDTH 140
 namespace view
 {
 

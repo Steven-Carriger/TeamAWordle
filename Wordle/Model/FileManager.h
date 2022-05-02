@@ -16,9 +16,18 @@ using namespace utils;
 #include "WordleManager.h"
 #include "StatisticsManager.h"
 
+#define DICTIONARY_FILEPATH "dictionary.txt"
+#define USER_STATISTICS_FILEPATH "userStats.csv"
+#define STRING_CONVERSION_ERROR "Error converting a loaded in string to an integer."
+#define USERNAME_INDEX 0
+#define TOTAL_GAMES_INDEX 1
+#define TOTAL_WINS_INDEX 2
+#define WINSTREAK_INDEX 3
+#define HIGHEST_WINSTREAK_INDEX 4
+#define GUESS_DISTRIBUTION_START_INDEX 5
+#define GUESS_DISTRIBUTION_END_INDEX 10
 namespace model
 {
-
 class FileManager
 {
 public:

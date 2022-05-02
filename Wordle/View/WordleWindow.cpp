@@ -1,14 +1,5 @@
 #include "WordleWindow.h"
 
-#include <iostream>
-#include <functional>
-using namespace std;
-using namespace std::placeholders;
-
-#define PADDING 20
-#define GUESS_LIMIT 6
-#define WORD_LENGTH 5
-#define BUTTON_HEIGHT 25
 namespace view
 {
 
@@ -61,6 +52,7 @@ void WordleWindow::cbDisplayUserStats(Fl_Widget* widget, void* data)
 {
     WordleWindow* window = (WordleWindow*) data;
     StatisticsWindow stats(window->statisticsManager);
+    stats.set_modal();
     stats.show();
 
     while (stats.shown())
@@ -79,6 +71,7 @@ void WordleWindow::cbDisplaySettings(Fl_Widget* widget, void* data)
 {
     WordleWindow* window = (WordleWindow*) data;
     SettingsWindow settings(window->isReuseAllowed);
+    settings.set_modal();
     settings.show();
 
     while (settings.shown())
@@ -91,6 +84,7 @@ void WordleWindow::cbDisplaySettings(Fl_Widget* widget, void* data)
 string WordleWindow::displayUserLogin()
 {
     LoginWindow loginWindow;
+    loginWindow.set_modal();
     loginWindow.show();
 
     while (loginWindow.shown())
@@ -124,9 +118,9 @@ void WordleWindow::setUpManagers()
 
 void WordleWindow::setUpButtons()
 {
-    this->saveButton = new Fl_Button(440, PADDING, 60, BUTTON_HEIGHT, "Save");
-    this->settingsButton = new Fl_Button(440, PADDING + BUTTON_HEIGHT, 60, BUTTON_HEIGHT, "Settings");
-    this->statisticsButton = new Fl_Button(440, PADDING + BUTTON_HEIGHT + BUTTON_HEIGHT, 60, BUTTON_HEIGHT, "Stats");
+    this->saveButton = new Fl_Button(BUTTON_X, PADDING, BUTTON_WIDTH, BUTTON_HEIGHT, "Save");
+    this->settingsButton = new Fl_Button(BUTTON_X, PADDING + BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT, "Settings");
+    this->statisticsButton = new Fl_Button(BUTTON_X, PADDING + BUTTON_HEIGHT + BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT, "Stats");
 
     this->saveButton->callback(cbSaveUserStats, this);
     this->settingsButton->callback(cbDisplaySettings, this);

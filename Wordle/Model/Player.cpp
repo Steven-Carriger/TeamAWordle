@@ -8,7 +8,7 @@ namespace model
 */
 Player::Player()
 {
-    this->userName = string("");
+    this->userName = string(EMPTY_CHARACTER);
     this->totalGames = 0;
     this->totalWins = 0;
     this->currentWinStreak = 0;
@@ -146,6 +146,11 @@ void Player::setGuessCountAtIndex(int index, int guessCount)
 */
 void Player::setUserName(const string& userName)
 {
+    if (userName.find_first_not_of(EMPTY_CHARACTER) == std::string::npos)
+    {
+        this->userName = DEFAULT_USERNAME;
+        return;
+    }
     this->userName = userName;
 }
 
@@ -161,7 +166,7 @@ float Player::calculateWinRate()
         return 0;
     }
     float rate = (float)this->totalWins / (float)this->totalGames;
-    return rate * 100;
+    return rate * FLOAT_TO_PERCENT_VALUE;
 }
 
 /**

@@ -1,10 +1,5 @@
 #include "SettingsWindow.h"
 
-#define WINDOW_WIDTH 400
-#define WINDOW_HEIGHT 300
-#define WINDOW_TITLE " Settings"
-#define BUTTON_WIDTH 70
-#define BUTTON_HEIGHT 30
 namespace view
 {
 
@@ -13,12 +8,12 @@ namespace view
 *
 * @param setting the setting to set by value
 */
-SettingsWindow::SettingsWindow(bool setting) : Fl_Window(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE)
+SettingsWindow::SettingsWindow(bool setting) : Fl_Window(WINDOW_WIDTH, WINDOW_HEIGHT, SETTINGS_TITLE)
 {
     begin();
-    this->okButton = new Fl_Button(WINDOW_WIDTH / 2 - 35, WINDOW_HEIGHT - 45, BUTTON_WIDTH, BUTTON_HEIGHT, "OK");
+    this->okButton = new Fl_Button(SETTINGS_BUTTON_X, SETTINGS_BUTTON_Y, SETTINGS_BUTTON_WIDTH, SETTINGS_BUTTON_HEIGHT, "OK");
     this->okButton->callback(cbOk, this);
-    this->allowReuseButton = new Fl_Check_Button(WINDOW_WIDTH / 2 - BUTTON_WIDTH, WINDOW_HEIGHT / 3, BUTTON_WIDTH * 2, BUTTON_HEIGHT, "Allow letter reuse");
+    this->allowReuseButton = new Fl_Check_Button(REUSE_BUTTON_X, REUSE_BUTTON_Y, REUSE_WIDTH, SETTINGS_BUTTON_HEIGHT, "Allow letter reuse");
     this->allowReuseButton->type(FL_TOGGLE_BUTTON);
     this->allowReuseButton->value(setting);
     end();
