@@ -67,6 +67,28 @@ void FileManager::loadUserData(StatisticsManager* manager)
     inputFile.close();
 }
 
+void FileManager::loadSettingsData(SettingsManager* manager)
+{
+    ifstream inputFile("settings.config");
+    if (inputFile.is_open())
+    {
+        string line;
+        getline(inputFile, line);
+        vector<string> settings = split(line, ',');
+        manager->setRepeatsAllowed(toBool(settings[0]));
+        manager->setWordLength(toInt(settings[1], "Not valid word length"));
+        inputFile.close();
+    }
+}
+
+void FileManager::saveSettingsData(SettingsManager* manager)
+{
+    ofstream saveFile;
+    saveFile.open("settings.config");
+    saveFile << manager->isRepeatsAllowed() << "," << manager->getWordLength() << endl;
+    saveFile.close();
+}
+
 /**
 * Saves the specified StatisticsManager's information to a file
 *

@@ -20,6 +20,7 @@ using namespace std;
 using namespace std::placeholders;
 
 #include "WordleManager.h"
+#include "SettingsManager.h"
 using namespace model;
 
 #include "WordleDisplayControl.h"
@@ -43,6 +44,7 @@ class WordleWindow : public Fl_Window
 private:
     WordleManager* manager;
     StatisticsManager* statisticsManager;
+    SettingsManager* settingsManager;
     FileManager* fileManager;
     string word;
     bool isReuseAllowed;

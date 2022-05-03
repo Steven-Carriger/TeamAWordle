@@ -1,5 +1,13 @@
 #include "SettingsWindow.h"
 
+#include "Utils.h"
+
+#define WINDOW_WIDTH 300
+#define WINDOW_HEIGHT 200
+#define WINDOW_TITLE " Settings"
+#define INPUT_WIDTH 70
+#define INPUT_HEIGHT 30
+#define GAP 10
 namespace view
 {
 
@@ -8,14 +16,22 @@ namespace view
 *
 * @param setting the setting to set by value
 */
-SettingsWindow::SettingsWindow(bool setting) : Fl_Window(WINDOW_WIDTH, WINDOW_HEIGHT, SETTINGS_TITLE)
+SettingsWindow::SettingsWindow(SettingsManager* manager) : Fl_Window(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE)
 {
     begin();
-    this->okButton = new Fl_Button(SETTINGS_BUTTON_X, SETTINGS_BUTTON_Y, SETTINGS_BUTTON_WIDTH, SETTINGS_BUTTON_HEIGHT, "OK");
+    this->manager = manager;
+    int pad = (WINDOW_HEIGHT - 3 * INPUT_HEIGHT - 2 * GAP) / 2;
+    this->okButton = new Fl_Button(WINDOW_WIDTH / 2 - INPUT_WIDTH / 2, pad + 2 * GAP + 2 * INPUT_HEIGHT, INPUT_WIDTH, INPUT_HEIGHT, "OK");
     this->okButton->callback(cbOk, this);
-    this->allowReuseButton = new Fl_Check_Button(REUSE_BUTTON_X, REUSE_BUTTON_Y, REUSE_WIDTH, SETTINGS_BUTTON_HEIGHT, "Allow letter reuse");
+    this->allowReuseButton = new Fl_Check_Button(WINDOW_WIDTH / 2 - INPUT_WIDTH / 2, pad, INPUT_HEIGHT, INPUT_HEIGHT, "Allow Repeat Letters");
     this->allowReuseButton->type(FL_TOGGLE_BUTTON);
-    this->allowReuseButton->value(setting);
+    this->allowReuseButton->value(manager->isRepeatsAllowed());
+    this->wordLengthComboBox = new Fl_Input_Choice(WINDOW_WIDTH / 2 - INPUT_WIDTH / 2, pad + GAP + INPUT_HEIGHT, INPUT_WIDTH, INPUT_HEIGHT, "Word Length: ");
+    this->wordLengthComboBox->add("4");
+    this->wordLengthComboBox->add("5");
+    this->wordLengthComboBox->add("6");
+    this->wordLengthComboBox->add("7");
+    this->wordLengthComboBox->value("5");
     end();
 }
 
@@ -39,6 +55,11 @@ void SettingsWindow::cbOk(Fl_Widget* widget, void* data)
 bool SettingsWindow::isReuseAllowed()
 {
     return this->allowReuseButton->value();
+}
+
+int SettingsWindow::getWordLength()
+{
+    return utils::toInt(this->wordLengthComboBox->value(), "Invalid Word Length");
 }
 
 /**
