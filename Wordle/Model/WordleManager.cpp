@@ -1,16 +1,7 @@
 #include "WordleManager.h"
 
-#include <cstdlib>
-#include <ctime>
-#include <iostream>
-#include <algorithm>
-using namespace std;
 
-#include "Utils.h"
-
-#define WORD_PRINT true
-
-
+#define WORD_PRINT
 namespace model
 {
 
@@ -76,7 +67,9 @@ void WordleManager::randomizeWord(int wordLength)
         }
     }
     this->currentWord = tmpWord;
-    if (WORD_PRINT) cout << this->currentWord << endl;
+    #ifdef WORD_PRINT
+    cout << this->currentWord << endl;
+    #endif
 }
 
 /**
@@ -126,7 +119,7 @@ vector<WordleManager::LetterState> WordleManager::getDetails(const string& word)
         if (tolower(word[i]) == this->currentWord[i])
         {
             states[i] = LetterState::CORRECT;
-            tmpWord.replace(tmpWord.begin(), tmpWord.end(), word[i], ' ');
+            tmpWord.replace(i, 1, " ");
         }
     }
 
@@ -142,11 +135,21 @@ vector<WordleManager::LetterState> WordleManager::getDetails(const string& word)
     return states;
 }
 
+/**
+* Sets the repeated letters to be allowed or not
+*
+* @param the value to determine if repeated letters are allowed or not
+*/
 void WordleManager::setRepeatedLetters(bool allowRepeatLetters)
 {
     this->allowRepeatLetters = allowRepeatLetters;
 }
 
+/**
+* Gets if repeated letters are allowed or not
+*
+* @return true if repeated letters are allowed, false otherwise
+*/
 bool WordleManager::isRepeatedLettersAllowed()
 {
     return this->allowRepeatLetters;

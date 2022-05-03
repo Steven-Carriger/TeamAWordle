@@ -1,19 +1,23 @@
 #ifndef WORDLEKEYBOARDCONTROL_H
 #define WORDLEKEYBOARDCONTROL_H
 
+#include <FL/Fl_Group.H>
+#include <FL/Fl_Button.H>
+#include <FL/Fl_Widget.H>
+
 #include <vector>
 #include <functional>
 #include <string.h>
 #include <bits/stdc++.h>
+#include <algorithm>
+#include <iostream>
 using namespace std;
 
 #include "WordleManager.h"
 using namespace model;
 
-#include <FL/Fl_Group.H>
-#include <FL/Fl_Button.H>
-#include <FL/Fl_Widget.H>
-
+#include "Utils.h"
+using namespace utils;
 
 #define KEYBOARD_GAP 5
 #define NON_LETTER_LENGTH 15

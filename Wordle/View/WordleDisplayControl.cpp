@@ -1,11 +1,5 @@
 #include "WordleDisplayControl.h"
 
-#include <algorithm>
-#include <iostream>
-using namespace std;
-
-#include <FL/Fl_Box.H>
-
 namespace view
 {
 
@@ -39,11 +33,21 @@ WordleDisplayControl::~WordleDisplayControl()
     //dtor
 }
 
+/**
+* Sets the loss call back to the provided callback
+*
+* @param callback the callback to set to
+*/
 void WordleDisplayControl::setLossCallback(LossCallback callback)
 {
     this->lossCallback = callback;
 }
 
+/**
+* Sets the win call back to the provided callback
+*
+* @param callback the callback to set to
+*/
 void WordleDisplayControl::setWinCallback(WinCallback callback)
 {
     this->winCallback = callback;
@@ -132,6 +136,11 @@ void WordleDisplayControl::submitWord(vector<WordleManager::LetterState> wordSta
     if (this->currWord == 6) this->lossCallback();
 }
 
+/**
+* Cleans the whole wordle display to where it is back to it's default state
+*
+* @param wordLength the length of words for the clean display
+*/
 void WordleDisplayControl::clean(int wordLength)
 {
     this->currLetter = 0;

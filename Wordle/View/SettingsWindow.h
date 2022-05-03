@@ -12,6 +12,15 @@ using namespace std;
 #include "SettingsManager.h"
 using namespace model;
 
+#include "Utils.h"
+using namespace utils;
+
+#define SETTINGS_WINDOW_WIDTH 300
+#define SETTINGS_WINDOW_HEIGHT 200
+#define SETTINGS_WINDOW_TITLE "Settings"
+#define INPUT_WIDTH 70
+#define INPUT_HEIGHT 30
+#define SETTINGS_GAP 10
 namespace view
 {
 
