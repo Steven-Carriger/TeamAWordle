@@ -1,11 +1,5 @@
 #include "WordleKeyboardControl.h"
 
-#include <algorithm>
-#include <iostream>
-using namespace std;
-
-#include "Utils.h"
-
 namespace view
 {
 
@@ -182,6 +176,9 @@ Fl_Button* WordleKeyboardControl::getKeyWithLetter(const char letter)
     return nullptr;
 }
 
+/**
+* Sets the keyboard to having the default appearance
+*/
 void WordleKeyboardControl::clean()
 {
     for (Fl_Button* button : this->buttons)

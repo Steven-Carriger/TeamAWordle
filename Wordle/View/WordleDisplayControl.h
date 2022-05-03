@@ -1,16 +1,18 @@
 #ifndef WORDLEDISPLAYCONTROL_H
 #define WORDLEDISPLAYCONTROL_H
 
+#include <FL/Fl_Group.H>
+#include <FL/Fl_Box.H>
+
 #include <string>
 #include <functional>
+#include <algorithm>
+#include <iostream>
 using namespace std;
 
 #include "WordleManager.h"
 #include "StatisticsManager.h"
 using namespace model;
-
-#include <FL/Fl_Group.H>
-#include <FL/Fl_Box.H>
 
 #define DISPLAY_GAP 5
 #define GUESS_LIMIT 6
