@@ -40,9 +40,9 @@ void StatisticsManager::setCurrentUser(string userName)
 {
     if (!this->userStats.count(toLowerCase(userName)))
     {
-        this->currentPlayer = new Player();
-        this->currentPlayer->setUserName(toLowerCase(userName));
-        this->userStats[toLowerCase(userName)] = this->currentPlayer;
+        this->userStats[toLowerCase(userName)] = new Player();
+        this->userStats[toLowerCase(userName)]->setUserName(toLowerCase(userName));
+        this->currentPlayer = userStats[toLowerCase(userName)];
         return;
     }
     this->currentPlayer = this->userStats[toLowerCase(userName)];

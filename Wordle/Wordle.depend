@@ -5,10 +5,8 @@
 	<FL/Fl_Box.H>
 	"WordleWindow.h"
 
-1651515556 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/View/WordleWindow.cpp
+1651604149 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/View/WordleWindow.cpp
 	"WordleWindow.h"
-	<iostream>
-	<functional>
 
 1651603716 /home/scarrig1/Desktop/TeamAWordle/Wordle/View/WordleWindow.h
 	<FL/Fl.H>
@@ -193,7 +191,7 @@
 	"StatisticsManager.h"
 	<string>
 
-1651603003 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/Model/StatisticsManager.cpp
+1651605326 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/Model/StatisticsManager.cpp
 	"StatisticsManager.h"
 
 1651603003 /home/scarrig1/Desktop/TeamAWordle/Wordle/Model/StatisticsManager.h
