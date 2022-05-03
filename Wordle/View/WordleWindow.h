@@ -37,6 +37,7 @@ using namespace model;
 #define BUTTON_HEIGHT 25
 #define GAP 15
 #define BUTTON_WIDTH 70
+#define DEFAULT_USERNAME "guest"
 namespace view
 {
 
