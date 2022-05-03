@@ -168,7 +168,7 @@ Fl_Button* WordleKeyboardControl::getKeyWithLetter(const char letter)
 {
     for (Fl_Button* button : this->buttons)
     {
-        if (toLowerCase(button->label()) == toLowerCase(&letter))
+        if (button->label() == toUpperCase(&letter))
         {
             return button;
         }
