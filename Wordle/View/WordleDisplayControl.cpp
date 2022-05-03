@@ -139,7 +139,7 @@ void WordleDisplayControl::submitWord(vector<WordleManager::LetterState> wordSta
 /**
 * Cleans the whole wordle display to where it is back to it's default state
 */
-void WordleDisplayControl::clean()
+void WordleDisplayControl::clean(int wordLength)
 {
     this->currLetter = 0;
     this->currWord = 0;

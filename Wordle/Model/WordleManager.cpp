@@ -66,7 +66,7 @@ void WordleManager::randomizeWord(int wordLength)
             }
         }
     }
-    this->currentWord = tmpWord;
+    this->currentWord = "pleia";
     if (WORD_PRINT) cout << this->currentWord << endl;
 }
 
@@ -117,7 +117,7 @@ vector<WordleManager::LetterState> WordleManager::getDetails(const string& word)
         if (tolower(word[i]) == this->currentWord[i])
         {
             states[i] = LetterState::CORRECT;
-            tmpWord.replace(tmpWord.begin(), tmpWord.end(), word[i], ' ');
+            tmpWord.replace(i, 1, " ");
         }
     }
 
