@@ -83,7 +83,7 @@ void WordleWindow::handleBackPress(WordleWindow* window)
 
 void WordleWindow::restart()
 {
-    this->displayControl->clean();
+    this->displayControl->clean(this->settingsManager->getWordLength());
     this->keyboardControl->clean();
     this->manager->randomizeWord(this->settingsManager->getWordLength());
     this->fileManager->saveUserData(this->statisticsManager);

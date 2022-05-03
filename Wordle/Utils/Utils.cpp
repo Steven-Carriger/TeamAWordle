@@ -61,6 +61,17 @@ int toInt(const string& text, const char* errorMessage)
     return value;
 }
 
+
+/** Converts passed in string to a bool
+*
+* @precondition none
+* @postcondition none
+* @throws Exception if text cannot be converted to a bool
+*
+* @param text text to convert to a bool
+*
+* @return text converted to an bool
+*/
 bool toBool(const string& text)
 {
     return (bool) toInt(text, "must be 0 or 1");

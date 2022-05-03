@@ -66,7 +66,7 @@ void WordleManager::randomizeWord(int wordLength)
             }
         }
     }
-    this->currentWord = "pleia";
+    this->currentWord = tmpWord;
     if (WORD_PRINT) cout << this->currentWord << endl;
 }
 

@@ -138,6 +138,8 @@ void WordleDisplayControl::submitWord(vector<WordleManager::LetterState> wordSta
 
 /**
 * Cleans the whole wordle display to where it is back to it's default state
+*
+* @param wordLength the length of words for the clean display
 */
 void WordleDisplayControl::clean(int wordLength)
 {

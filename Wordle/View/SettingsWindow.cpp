@@ -57,11 +57,22 @@ bool SettingsWindow::isReuseAllowed()
     return this->allowReuseButton->value();
 }
 
+/**
+* gets the wordLength in the form
+*
+* @return the wordLength
+*/
 int SettingsWindow::getWordLength()
 {
     return utils::toInt(this->wordLengthComboBox->value(), "Invalid Word Length");
 }
 
+
+/**
+* Returns true if the wordle should restart
+*
+* @return true if wordle should restart otherwise false.
+*/
 bool SettingsWindow::isShouldRestart()
 {
     return this->shouldRestart;
