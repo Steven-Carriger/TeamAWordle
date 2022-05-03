@@ -4,9 +4,13 @@
 #include <Fl/Fl_Window.H>
 #include <Fl/Fl_Button.H>
 #include <Fl/Fl_Check_Button.H>
+#include <FL/Fl_Input_Choice.H>
 
 #include <string>
 using namespace std;
+
+#include "SettingsManager.h"
+using namespace model;
 
 namespace view
 {
@@ -14,13 +18,16 @@ namespace view
 class SettingsWindow : public Fl_Window
 {
 private:
+    SettingsManager* manager;
     Fl_Button* okButton;
     Fl_Check_Button* allowReuseButton;
+    Fl_Input_Choice* wordLengthComboBox;
 public:
-    SettingsWindow(bool setting);
+    SettingsWindow(SettingsManager* manager);
     virtual ~SettingsWindow();
     static void cbOk(Fl_Widget* widget, void* data);
     bool isReuseAllowed();
+    int getWordLength();
 };
 
 }

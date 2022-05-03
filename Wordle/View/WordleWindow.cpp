@@ -1,32 +1,24 @@
 #include "WordleWindow.h"
 
-#include <iostream>
-#include <functional>
-#include <vector>
-using namespace std;
-using namespace std::placeholders;
-
-#include <WordleManager.h>
-using namespace model;
-
-#include <FL/fl_ask.H>
-
-#define PADDING 20
-#define GUESS_LIMIT 6
-#define WORD_LENGTH 5
-#define BUTTON_HEIGHT 25
 namespace view
 {
 
+/**
+* Creates a new WordleWindow
+*
+* @param width the width of the window
+* @param height the height of the window
+* @param title the title of the window
+*/
 WordleWindow::WordleWindow(int width, int height, const char* title) : Fl_Window(width, height, title)
 {
+    this->setUpManagers();
     begin();
-    this->displayControl = new WordleDisplayControl(PADDING, PADDING, width - 2 * PADDING, (height - PADDING) / 2, GUESS_LIMIT, WORD_LENGTH);
+    this->displayControl = new WordleDisplayControl(PADDING, PADDING, width - 2 * PADDING, (height - PADDING) / 2, GUESS_LIMIT, this->settingsManager->getWordLength());
     this->keyboardControl = new WordleKeyboardControl(PADDING, (height - PADDING) / 2, width - 2 * PADDING, height / 2);
     this->isReuseAllowed = false;
     this->setUpHandlers();
     this->setUpButtons();
-    this->setUpManagers();
     end();
 }
 
@@ -42,10 +34,8 @@ void WordleWindow::handleEnterPress(WordleWindow* window)
 {
     if (window->manager->validateWord(window->word))
     {
-        string word = window->word;
-        window->keyboardControl->updateKeys(window->manager->getDetails(word), word);
-        window->displayControl->submitWord(window->manager->getDetails(word));
-
+        window->displayControl->submitWord(window->manager->getDetails(window->word), window->statisticsManager);
+        window->keyboardControl->updateKeys(window->manager->getDetails(window->word), window->word);
         window->word = "";
     }
 }
@@ -99,6 +89,7 @@ void WordleWindow::cbDisplayUserStats(Fl_Widget* widget, void* data)
 {
     WordleWindow* window = (WordleWindow*) data;
     StatisticsWindow stats(window->statisticsManager);
+    stats.set_modal();
     stats.show();
 
     while (stats.shown())
@@ -116,19 +107,25 @@ void WordleWindow::cbSaveUserStats(Fl_Widget* widget, void* data)
 void WordleWindow::cbDisplaySettings(Fl_Widget* widget, void* data)
 {
     WordleWindow* window = (WordleWindow*) data;
-    SettingsWindow settings(window->isReuseAllowed);
+    SettingsWindow settings(window->settingsManager);
+    settings.set_modal();
     settings.show();
 
     while (settings.shown())
     {
         Fl::wait();
     }
-    window->isReuseAllowed = settings.isReuseAllowed();
+    window->manager->setRepeatedLetters(settings.isReuseAllowed());
+    window->settingsManager->setRepeatsAllowed(settings.isReuseAllowed());
+    window->settingsManager->setWordLength(settings.getWordLength());
+    window->fileManager->saveSettingsData(window->settingsManager);
+    //window->restart();
 }
 
 string WordleWindow::displayUserLogin()
 {
     LoginWindow loginWindow;
+    loginWindow.set_modal();
     loginWindow.show();
 
     while (loginWindow.shown())
@@ -152,27 +149,33 @@ void WordleWindow::setUpManagers()
 {
     this->manager = new WordleManager();
     this->statisticsManager = new StatisticsManager();
+    this->settingsManager = new SettingsManager();
     this->fileManager = new FileManager();
 
     this->fileManager->loadDictionary(this->manager);
+    this->fileManager->loadSettingsData(this->settingsManager);
     this->fileManager->loadUserData(this->statisticsManager);
 
     this->statisticsManager->setCurrentUser(this->displayUserLogin());
-    this->manager->randomizeWord(WORD_LENGTH);
+    this->manager->randomizeWord(this->settingsManager->getWordLength());
+    this->manager->setRepeatedLetters(this->settingsManager->isRepeatsAllowed());
     this->word = "";
 }
 
 void WordleWindow::setUpButtons()
 {
-    this->saveButton = new Fl_Button(440, PADDING, 60, BUTTON_HEIGHT, "Save");
-    this->settingsButton = new Fl_Button(440, PADDING + BUTTON_HEIGHT, 60, BUTTON_HEIGHT, "Settings");
-    this->statisticsButton = new Fl_Button(440, PADDING + BUTTON_HEIGHT + BUTTON_HEIGHT, 60, BUTTON_HEIGHT, "Stats");
+    this->saveButton = new Fl_Button(BUTTON_X, PADDING, BUTTON_WIDTH, BUTTON_HEIGHT, "Save");
+    this->settingsButton = new Fl_Button(BUTTON_X, PADDING + BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT, "Settings");
+    this->statisticsButton = new Fl_Button(BUTTON_X, PADDING + BUTTON_HEIGHT + BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT, "Stats");
 
     this->saveButton->callback(cbSaveUserStats, this);
     this->settingsButton->callback(cbDisplaySettings, this);
     this->statisticsButton->callback(cbDisplayUserStats, this);
 }
 
+/**
+* WordleWindow deconstructor
+*/
 WordleWindow::~WordleWindow()
 {
 }

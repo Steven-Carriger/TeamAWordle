@@ -6,11 +6,15 @@
 using namespace std;
 
 #include "WordleManager.h"
+#include "StatisticsManager.h"
 using namespace model;
 
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Box.H>
 
+#define DISPLAY_GAP 5
+#define GUESS_LIMIT 6
+#define LETTER_VALUE 1
 namespace view
 {
 
@@ -34,10 +38,10 @@ public:
     virtual ~WordleDisplayControl();
     bool addLetter(const char* letter);
     bool removeLetter();
-    void submitWord(vector<WordleManager::LetterState> wordState);
     void setLossCallback(LossCallback callback);
     void setWinCallback(WinCallback callback);
     void clean();
+    void submitWord(vector<WordleManager::LetterState> wordState, StatisticsManager* statsManager);
 private:
     void createGrid();
 };

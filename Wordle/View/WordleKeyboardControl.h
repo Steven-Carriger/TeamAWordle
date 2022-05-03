@@ -14,6 +14,12 @@ using namespace model;
 #include <FL/Fl_Button.H>
 #include <FL/Fl_Widget.H>
 
+
+#define KEYBOARD_GAP 5
+#define NON_LETTER_LENGTH 15
+#define NUM_FIRST_ROW 10
+#define NUM_OTHER_ROW 9
+#define NUM_ROW 3
 namespace view
 {
 

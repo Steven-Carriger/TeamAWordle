@@ -1,11 +1,5 @@
 #include "WordleKeyboardControl.h"
 
-#define KEYBOARD_GAP 5
-#define NON_LETTER_LENGTH 15
-#define NUM_FIRST_ROW 10
-#define NUM_OTHER_ROW 9
-#define NUM_ROW 3
-
 #include <algorithm>
 #include <iostream>
 using namespace std;
@@ -15,6 +9,14 @@ using namespace std;
 namespace view
 {
 
+/**
+* Creates a new WordleKeyboardControl
+*
+* @param x the x value of the control
+* @param y the y value of the control
+* @param width the width of the control
+* @param height the height of the control
+*/
 WordleKeyboardControl::WordleKeyboardControl(int x, int y, int width, int height) : Fl_Group(x, y, width, height, nullptr)
 {
     begin();
@@ -22,12 +24,13 @@ WordleKeyboardControl::WordleKeyboardControl(int x, int y, int width, int height
     end();
 }
 
+/**
+* The WordleKeyboardControl deconstructor
+*/
 WordleKeyboardControl::~WordleKeyboardControl()
 {
     //dtor
 }
-
-
 
 void WordleKeyboardControl::createButtons()
 {
@@ -74,16 +77,31 @@ void WordleKeyboardControl::createButtons()
     }
 }
 
+/**
+* Sets the current call back based on the provided call back
+*
+* @param letterCallback the LetterCallback to set to
+*/
 void WordleKeyboardControl::setLetterCallback(LetterCallback letterCallback)
 {
     this->letterCallback = letterCallback;
 }
 
+/**
+* Sets the current call back based on the provided call back
+*
+* @param enterCallback the EnterCallback to set to
+*/
 void WordleKeyboardControl::setEnterCallback(EnterCallback enterCallback)
 {
     this->enterCallback = enterCallback;
 }
 
+/**
+* Sets the current call back based on the provided call back
+*
+* @param backCallback the BackCallback to set to
+*/
 void WordleKeyboardControl::setBackCallback(BackCallback backCallback)
 {
     this->backCallback = backCallback;
@@ -107,6 +125,13 @@ void WordleKeyboardControl::handleBackPress(Fl_Widget* sender)
     keyboard->backCallback();
 }
 
+
+/**
+* updates the display of the keys based on the state of the letters
+*
+* @param wordState a collection of states based on the provided word
+* @param userWord the word the user provided
+*/
 void WordleKeyboardControl::updateKeys(vector<WordleManager::LetterState> wordState, const string& userWord)
 {
     for (int currIndx = 0; currIndx < userWord.length(); currIndx++)

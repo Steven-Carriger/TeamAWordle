@@ -1,16 +1,16 @@
 # depslib dependency file v1.0
-1651329527 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/main.cpp
+1651509682 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/main.cpp
 	<FL/Fl.H>
 	<FL/Fl_Window.H>
 	<FL/Fl_Box.H>
 	"WordleWindow.h"
 
-1651346610 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/View/WordleWindow.cpp
+1651515556 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/View/WordleWindow.cpp
 	"WordleWindow.h"
 	<iostream>
 	<functional>
 
-1651345778 /home/scarrig1/Desktop/TeamAWordle/Wordle/View/WordleWindow.h
+1651515650 /home/scarrig1/Desktop/TeamAWordle/Wordle/View/WordleWindow.h
 	<FL/Fl.H>
 	<FL/Fl_Window.H>
 	<FL/Fl_Group.H>
@@ -23,6 +23,8 @@
 	<ctype.h>
 	<iostream>
 	<vector>
+	<iostream>
+	<functional>
 	"WordleManager.h"
 	"WordleDisplayControl.h"
 	"WordleKeyboardControl.h"
@@ -37,7 +39,7 @@
 	<FL/Fl_Box.H>
 	"WordleWindow.h"
 
-1651440749 /home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/View/WordleWindow.h
+1651549653 /home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/View/WordleWindow.h
 	<FL/Fl.H>
 	<FL/Fl_Window.H>
 	<FL/Fl_Group.H>
@@ -51,6 +53,7 @@
 	<iostream>
 	<vector>
 	"WordleManager.h"
+	"SettingsManager.h"
 	"WordleDisplayControl.h"
 	"WordleKeyboardControl.h"
 	"StatisticsWindow.h"
@@ -58,47 +61,48 @@
 	"LoginWindow.h"
 	"FileManager.h"
 
-1651446559 source:/home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/View/WordleWindow.cpp
+1651550680 source:/home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/View/WordleWindow.cpp
 	"WordleWindow.h"
 	<iostream>
 	<functional>
 	<vector>
 	<WordleManager.h>
 	<FL/fl_ask.H>
-
-1651364384 source:/home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/Model/WordleManager.cpp
+1651517381 source:/home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/Model/WordleManager.cpp
 	"WordleManager.h"
 	<fstream>
 	<cstdlib>
 	<ctime>
 	<iostream>
+	<algorithm>
 	"Utils.h"
 
-1651364384 /home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/Model/WordleManager.h
+1651517109 /home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/Model/WordleManager.h
 	<string>
 	<vector>
 	"Utils.h"
 
-1651440826 /home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/View/WordleDisplayControl.h
+1651455917 /home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/View/WordleDisplayControl.h
 	<string>
 	<functional>
 	"WordleManager.h"
+	"StatisticsManager.h"
 	<FL/Fl_Group.H>
 	<FL/Fl_Box.H>
 
-1651443790 source:/home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/View/WordleDisplayControl.cpp
+1651455917 source:/home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/View/WordleDisplayControl.cpp
 	"WordleDisplayControl.h"
 	<algorithm>
 	<iostream>
 	<FL/Fl_Box.H>
 
-1651446611 source:/home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/View/WordleKeyboardControl.cpp
+1651455917 source:/home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/View/WordleKeyboardControl.cpp
 	"WordleKeyboardControl.h"
 	<algorithm>
 	<iostream>
 	"Utils.h"
 
-1651446138 /home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/View/WordleKeyboardControl.h
+1651455917 /home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/View/WordleKeyboardControl.h
 	<vector>
 	<functional>
 	<string.h>
@@ -108,28 +112,33 @@
 	<FL/Fl_Button.H>
 	<FL/Fl_Widget.H>
 
-1651364384 /home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/Utils/Utils.h
+1651527030 /home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/Utils/Utils.h
 	<vector>
 	<sstream>
 	<iostream>
 	<string>
 
-1651364384 source:/home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/Utils/Utils.cpp
+1651527105 source:/home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/Utils/Utils.cpp
 	"Utils.h"
 	<algorithm>
 
-1651329527 /home/scarrig1/Desktop/TeamAWordle/Wordle/Model/WordleManager.h
+1651513184 /home/scarrig1/Desktop/TeamAWordle/Wordle/Model/WordleManager.h
 	<string>
 	<vector>
+	<fstream>
+	<cstdlib>
+	<ctime>
+	<iostream>
 	"Utils.h"
 
-1651329527 /home/scarrig1/Desktop/TeamAWordle/Wordle/View/WordleDisplayControl.h
+1651514862 /home/scarrig1/Desktop/TeamAWordle/Wordle/View/WordleDisplayControl.h
 	<string>
 	"WordleManager.h"
+	"StatisticsManager.h"
 	<FL/Fl_Group.H>
 	<FL/Fl_Box.H>
 
-1651329527 /home/scarrig1/Desktop/TeamAWordle/Wordle/View/WordleKeyboardControl.h
+1651511630 /home/scarrig1/Desktop/TeamAWordle/Wordle/View/WordleKeyboardControl.h
 	<vector>
 	<functional>
 	<string.h>
@@ -139,40 +148,35 @@
 	<FL/Fl_Button.H>
 	<FL/Fl_Widget.H>
 
-1651329527 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/Model/WordleManager.cpp
+1651513188 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/Model/WordleManager.cpp
 	"WordleManager.h"
-	<fstream>
-	<cstdlib>
-	<ctime>
-	<iostream>
-	"Utils.h"
 
-1651329527 /home/scarrig1/Desktop/TeamAWordle/Wordle/Utils/Utils.h
+1651513219 /home/scarrig1/Desktop/TeamAWordle/Wordle/Utils/Utils.h
 	<vector>
 	<sstream>
 	<iostream>
 	<string>
-
-1651329527 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/Utils/Utils.cpp
-	"Utils.h"
 	<algorithm>
 
-1651329527 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/View/WordleDisplayControl.cpp
+1651513221 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/Utils/Utils.cpp
+	"Utils.h"
+
+1651514906 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/View/WordleDisplayControl.cpp
 	"WordleDisplayControl.h"
 	<algorithm>
 	<iostream>
 	<FL/Fl_Box.H>
 
-1651329527 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/View/WordleKeyboardControl.cpp
+1651511701 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/View/WordleKeyboardControl.cpp
 	"WordleKeyboardControl.h"
 	<algorithm>
 	<iostream>
 	"Utils.h"
 
-1651329527 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/View/StatisticsWindow.cpp
+1651515486 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/View/StatisticsWindow.cpp
 	"StatisticsWindow.h"
 
-1651329527 /home/scarrig1/Desktop/TeamAWordle/Wordle/View/StatisticsWindow.h
+1651515474 /home/scarrig1/Desktop/TeamAWordle/Wordle/View/StatisticsWindow.h
 	<Fl/Fl_Window.H>
 	<Fl/Fl_Button.H>
 	<Fl/Fl_Output.H>
@@ -181,26 +185,26 @@
 	"StatisticsManager.h"
 	<string>
 
-1651346640 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/Model/StatisticsManager.cpp
+1651511246 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/Model/StatisticsManager.cpp
 	"StatisticsManager.h"
 
-1651329527 /home/scarrig1/Desktop/TeamAWordle/Wordle/Model/StatisticsManager.h
+1651511675 /home/scarrig1/Desktop/TeamAWordle/Wordle/Model/StatisticsManager.h
 	<map>
 	<string>
 	"Utils.h"
 	"Player.h"
 
-1651329527 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/Model/Player.cpp
+1651511090 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/Model/Player.cpp
 	"Player.h"
 
-1651329527 /home/scarrig1/Desktop/TeamAWordle/Wordle/Model/Player.h
+1651511668 /home/scarrig1/Desktop/TeamAWordle/Wordle/Model/Player.h
 	<vector>
 	<string>
 
-1651329527 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/Model/FileManager.cpp
+1651514633 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/Model/FileManager.cpp
 	"FileManager.h"
 
-1651329527 /home/scarrig1/Desktop/TeamAWordle/Wordle/Model/FileManager.h
+1651511653 /home/scarrig1/Desktop/TeamAWordle/Wordle/Model/FileManager.h
 	<map>
 	<string>
 	<fstream>
@@ -212,34 +216,25 @@
 	"WordleManager.h"
 	"StatisticsManager.h"
 
-1651340513 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/View/SettingsWindow.cpp
+1651515454 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/View/SettingsWindow.cpp
 	"SettingsWindow.h"
 
-1651343958 /home/scarrig1/Desktop/TeamAWordle/Wordle/View/SettingsWindow.h
+1651515454 /home/scarrig1/Desktop/TeamAWordle/Wordle/View/SettingsWindow.h
 	<Fl/Fl_Window.H>
 	<Fl/Fl_Button.H>
 	<Fl/Fl_Check_Button.H>
 	<string>
 
-1651346355 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/View/LoginWindow.cpp
+1651515425 source:/home/scarrig1/Desktop/TeamAWordle/Wordle/View/LoginWindow.cpp
 	"LoginWindow.h"
 
-1651346081 /home/scarrig1/Desktop/TeamAWordle/Wordle/View/LoginWindow.h
+1651515412 /home/scarrig1/Desktop/TeamAWordle/Wordle/View/LoginWindow.h
 	<Fl/Fl_Window.H>
 	<Fl/Fl_Button.H>
 	<Fl/Fl_Input.H>
 	<string>
 
-1651364384 /home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/View/StatisticsWindow.h
-	<Fl/Fl_Window.H>
-	<Fl/Fl_Button.H>
-	<Fl/Fl_Output.H>
-	<Fl/Fl_Text_Buffer.H>
-	<Fl/Fl_Text_Display.H>
-	"StatisticsManager.h"
-	<string>
-
-1651422256 /home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/Model/StatisticsManager.h
+1651455917 /home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/Model/StatisticsManager.h
 	<map>
 	<string>
 	"Utils.h"
@@ -249,11 +244,22 @@
 	<vector>
 	<string>
 
-1651364384 /home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/View/SettingsWindow.h
+1651455917 /home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/View/StatisticsWindow.h
+	<Fl/Fl_Window.H>
+	<Fl/Fl_Button.H>
+	<Fl/Fl_Output.H>
+	<Fl/Fl_Text_Buffer.H>
+	<Fl/Fl_Text_Display.H>
+	"StatisticsManager.h"
+	<string>
+
+1651589683 /home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/View/SettingsWindow.h
 	<Fl/Fl_Window.H>
 	<Fl/Fl_Button.H>
 	<Fl/Fl_Check_Button.H>
+	<FL/Fl_Input_Choice.H>
 	<string>
+	"SettingsManager.h"
 
 1651364384 /home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/View/LoginWindow.h
 	<Fl/Fl_Window.H>
@@ -261,7 +267,7 @@
 	<Fl/Fl_Input.H>
 	<string>
 
-1651364384 /home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/Model/FileManager.h
+1651526970 /home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/Model/FileManager.h
 	<map>
 	<string>
 	<fstream>
@@ -272,22 +278,29 @@
 	"Player.h"
 	"WordleManager.h"
 	"StatisticsManager.h"
+	"SettingsManager.h"
 
-1651364384 source:/home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/Model/FileManager.cpp
+1651550235 source:/home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/Model/FileManager.cpp
 	"FileManager.h"
 
-1651364384 source:/home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/Model/Player.cpp
+1651455917 source:/home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/Model/Player.cpp
 	"Player.h"
 
-1651422256 source:/home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/Model/StatisticsManager.cpp
+1651455917 source:/home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/Model/StatisticsManager.cpp
 	"StatisticsManager.h"
 
-1651422256 source:/home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/View/StatisticsWindow.cpp
-	"StatisticsWindow.h"
-
-1651364384 source:/home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/View/LoginWindow.cpp
+1651455917 source:/home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/View/LoginWindow.cpp
 	"LoginWindow.h"
 
-1651364384 source:/home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/View/SettingsWindow.cpp
+1651457676 source:/home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/View/StatisticsWindow.cpp
+	"StatisticsWindow.h"
+
+1651589709 source:/home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/View/SettingsWindow.cpp
 	"SettingsWindow.h"
+	"Utils.h"
+
+1651518200 source:/home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/Model/SettingsManager.cpp
+	"SettingsManager.h"
+
+1651517933 /home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/Model/SettingsManager.h
 

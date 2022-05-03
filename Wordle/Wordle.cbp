@@ -30,6 +30,8 @@
 		<Unit filename="Model/FileManager.h" />
 		<Unit filename="Model/Player.cpp" />
 		<Unit filename="Model/Player.h" />
+		<Unit filename="Model/SettingsManager.cpp" />
+		<Unit filename="Model/SettingsManager.h" />
 		<Unit filename="Model/StatisticsManager.cpp" />
 		<Unit filename="Model/StatisticsManager.h" />
 		<Unit filename="Model/WordleManager.cpp" />
