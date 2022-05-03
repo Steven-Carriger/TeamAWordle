@@ -17,7 +17,7 @@ WordleWindow::WordleWindow(int width, int height, const char* title) : Fl_Window
     this->displayControl = new WordleDisplayControl(PADDING, PADDING, width - 2 * PADDING, (height - PADDING) / 2, GUESS_LIMIT, this->settingsManager->getWordLength());
     this->keyboardControl = new WordleKeyboardControl(PADDING, (height - PADDING) / 2, width - 2 * PADDING, height / 2);
     this->isReuseAllowed = false;
-    this->setUpKeyboardHandlers();
+    this->setUpHandlers();
     this->setUpButtons();
     end();
 }
@@ -40,12 +40,49 @@ void WordleWindow::handleEnterPress(WordleWindow* window)
     }
 }
 
+void WordleWindow::handleWin(WordleWindow* window, int wordCount)
+{
+    switch ( fl_choice("You Won! What do you want to do next?", "Logout", "Play Agian", "Exit") ) {
+        case 0:
+            {
+                window->fileManager->saveUserData(window->statisticsManager);
+                string user = window->displayUserLogin();
+                window->statisticsManager->setCurrentUser(user);
+                window->restart();
+                break;
+            }
+        case 1:
+            window->restart();
+            break;
+        case 2:
+            window->hide();
+            break;
+    }
+}
+
+void WordleWindow::handleLoss(WordleWindow* window)
+{
+    const string word = window->manager->getCurrentWord();
+    switch ( fl_choice("You Lost! The word was %s. What do you want to do?", "Logout", "Play Agian", "Exit", word.c_str()) ) {
+        case 0: break;
+        case 1: break;
+        case 2: window->hide();
+    }
+}
+
 void WordleWindow::handleBackPress(WordleWindow* window)
 {
     if (window->displayControl->removeLetter())
     {
         window->word.pop_back();
     }
+}
+
+void WordleWindow::restart()
+{
+    this->displayControl->clean();
+    this->keyboardControl->clean();
+    this->manager->randomizeWord(5);
 }
 
 void WordleWindow::cbDisplayUserStats(Fl_Widget* widget, void* data)
@@ -99,11 +136,13 @@ string WordleWindow::displayUserLogin()
     return loginWindow.getUserName();
 }
 
-void WordleWindow::setUpKeyboardHandlers()
+void WordleWindow::setUpHandlers()
 {
     this->keyboardControl->setLetterCallback(bind(handleLetterPress, this, _1));
     this->keyboardControl->setEnterCallback(bind(handleEnterPress, this));
     this->keyboardControl->setBackCallback(bind(handleBackPress, this));
+    this->displayControl->setWinCallback(bind(handleWin, this, _1));
+    this->displayControl->setLossCallback(bind(handleLoss, this));
 }
 
 void WordleWindow::setUpManagers()

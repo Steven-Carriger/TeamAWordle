@@ -65,7 +65,9 @@
 	"WordleWindow.h"
 	<iostream>
 	<functional>
-
+	<vector>
+	<WordleManager.h>
+	<FL/fl_ask.H>
 1651517381 source:/home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/Model/WordleManager.cpp
 	"WordleManager.h"
 	<fstream>
@@ -82,6 +84,7 @@
 
 1651455917 /home/alexthemathnerd/Code/CPlus/TeamAWordle/Wordle/View/WordleDisplayControl.h
 	<string>
+	<functional>
 	"WordleManager.h"
 	"StatisticsManager.h"
 	<FL/Fl_Group.H>
