@@ -1,13 +1,5 @@
 #include "WordleManager.h"
 
-#include <cstdlib>
-#include <ctime>
-#include <iostream>
-#include <algorithm>
-using namespace std;
-
-#include "Utils.h"
-
 namespace model
 {
 
@@ -137,11 +129,21 @@ vector<WordleManager::LetterState> WordleManager::getDetails(const string& word)
     return states;
 }
 
+/**
+* Sets the repeated letters to be allowed or not
+*
+* @param the value to determine if repeated letters are allowed or not
+*/
 void WordleManager::setRepeatedLetters(bool allowRepeatLetters)
 {
     this->allowRepeatLetters = allowRepeatLetters;
 }
 
+/**
+* Gets if repeated letters are allowed or not
+*
+* @return true if repeated letters are allowed, false otherwise
+*/
 bool WordleManager::isRepeatedLettersAllowed()
 {
     return this->allowRepeatLetters;

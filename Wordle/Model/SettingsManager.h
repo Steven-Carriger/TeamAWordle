@@ -1,6 +1,7 @@
 #ifndef SETTINGSMANAGER_H
 #define SETTINGSMANAGER_H
 
+#define DEFULT_WORD_LENGTH 5
 namespace model {
 
 class SettingsManager

@@ -1,13 +1,5 @@
 #include "SettingsWindow.h"
 
-#include "Utils.h"
-
-#define WINDOW_WIDTH 300
-#define WINDOW_HEIGHT 200
-#define WINDOW_TITLE " Settings"
-#define INPUT_WIDTH 70
-#define INPUT_HEIGHT 30
-#define GAP 10
 namespace view
 {
 
@@ -16,17 +8,17 @@ namespace view
 *
 * @param setting the setting to set by value
 */
-SettingsWindow::SettingsWindow(SettingsManager* manager) : Fl_Window(WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_TITLE)
+SettingsWindow::SettingsWindow(SettingsManager* manager) : Fl_Window(SETTINGS_WINDOW_WIDTH, SETTINGS_WINDOW_HEIGHT, SETTINGS_WINDOW_TITLE)
 {
     begin();
     this->manager = manager;
-    int pad = (WINDOW_HEIGHT - 3 * INPUT_HEIGHT - 2 * GAP) / 2;
-    this->okButton = new Fl_Button(WINDOW_WIDTH / 2 - INPUT_WIDTH / 2, pad + 2 * GAP + 2 * INPUT_HEIGHT, INPUT_WIDTH, INPUT_HEIGHT, "OK");
+    int pad = (SETTINGS_WINDOW_HEIGHT - 3 * INPUT_HEIGHT - 2 * GAP) / 2;
+    this->okButton = new Fl_Button(SETTINGS_WINDOW_WIDTH / 2 - INPUT_WIDTH / 2, pad + 2 * GAP + 2 * INPUT_HEIGHT, INPUT_WIDTH, INPUT_HEIGHT, "OK");
     this->okButton->callback(cbOk, this);
-    this->allowReuseButton = new Fl_Check_Button(WINDOW_WIDTH / 2 - INPUT_WIDTH / 2, pad, INPUT_HEIGHT, INPUT_HEIGHT, "Allow Repeat Letters");
+    this->allowReuseButton = new Fl_Check_Button(SETTINGS_WINDOW_WIDTH / 2 - INPUT_WIDTH / 2, pad, INPUT_HEIGHT, INPUT_HEIGHT, "Allow Repeat Letters");
     this->allowReuseButton->type(FL_TOGGLE_BUTTON);
     this->allowReuseButton->value(manager->isRepeatsAllowed());
-    this->wordLengthComboBox = new Fl_Input_Choice(WINDOW_WIDTH / 2 - INPUT_WIDTH / 2, pad + GAP + INPUT_HEIGHT, INPUT_WIDTH, INPUT_HEIGHT, "Word Length: ");
+    this->wordLengthComboBox = new Fl_Input_Choice(SETTINGS_WINDOW_WIDTH / 2 - INPUT_WIDTH / 2, pad + GAP + INPUT_HEIGHT, INPUT_WIDTH, INPUT_HEIGHT, "Word Length: ");
     this->wordLengthComboBox->add("4");
     this->wordLengthComboBox->add("5");
     this->wordLengthComboBox->add("6");
