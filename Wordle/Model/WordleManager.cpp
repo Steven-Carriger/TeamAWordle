@@ -1,7 +1,7 @@
 #include "WordleManager.h"
 
 
-#define WORD_PRINT true
+#define WORD_PRINT
 namespace model
 {
 
@@ -67,7 +67,9 @@ void WordleManager::randomizeWord(int wordLength)
         }
     }
     this->currentWord = tmpWord;
-    if (WORD_PRINT) cout << this->currentWord << endl;
+    #ifdef WORD_PRINT
+    cout << this->currentWord << endl;
+    #endif
 }
 
 /**

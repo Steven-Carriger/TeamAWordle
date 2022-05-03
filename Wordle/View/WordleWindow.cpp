@@ -41,22 +41,24 @@ void WordleWindow::handleEnterPress(WordleWindow* window)
 
 void WordleWindow::handleWin(WordleWindow* window, int wordCount)
 {
-    showEndPopup(window, "You Won! What do you want to do next?", nullptr);
     window->statisticsManager->increasePlayersStats(true, wordCount);
+    showEndPopup(window, "You Won! What do you want to do next?", nullptr);
     window->fileManager->saveUserData(window->statisticsManager);
 }
 
 void WordleWindow::handleLoss(WordleWindow* window)
 {
     string word = window->manager->getCurrentWord();
-    showEndPopup(window, "You Lost! The word was %s. What do you want to do?", word.c_str());
     window->statisticsManager->increasePlayersStats(false, 7);
+    showEndPopup(window, "You Lost! The word was %s. What do you want to do?", word.c_str());
     window->fileManager->saveUserData(window->statisticsManager);
 }
 
 void WordleWindow::showEndPopup(WordleWindow* window, const char* endMessage, const void* endData)
 {
-    switch ( fl_choice(endMessage, "Logout", "Play Agian", "Exit", endData) ) {
+    window->cbDisplayUserStats(window->statisticsButton, window);
+    switch ( fl_choice(endMessage, "Logout", "Play Agian", "Exit", endData) )
+    {
         case 0:
             {
                 window->fileManager->saveUserData(window->statisticsManager);
