@@ -41,7 +41,7 @@ public:
     bool removeLetter();
     void setLossCallback(LossCallback callback);
     void setWinCallback(WinCallback callback);
-    void clean(int wordLength);
+    void clean();
     void submitWord(vector<WordleManager::LetterState> wordState);
 private:
     void createGrid();

@@ -54,6 +54,7 @@ void WordleWindow::handleLoss(WordleWindow* window)
 
 void WordleWindow::showEndPopup(WordleWindow* window, const char* endMessage, const void* endData)
 {
+    window->fileManager->saveUserData(window->statisticsManager);
     switch ( fl_choice(endMessage, "Logout", "Play Agian", "Exit", endData) ) {
         case 0:
             {
@@ -82,9 +83,10 @@ void WordleWindow::handleBackPress(WordleWindow* window)
 
 void WordleWindow::restart()
 {
-    this->displayControl->clean(this->settingsManager->getWordLength());
+    this->displayControl->clean();
     this->keyboardControl->clean();
     this->manager->randomizeWord(this->settingsManager->getWordLength());
+    this->fileManager->saveUserData(this->statisticsManager);
     this->word = "";
 }
 
@@ -147,6 +149,10 @@ string WordleWindow::displayUserLogin()
         Fl::wait();
     }
 
+    if (loginWindow.getUserName() == "")
+    {
+        return DEFAULT_USERNAME;
+    }
     return loginWindow.getUserName();
 }
 
