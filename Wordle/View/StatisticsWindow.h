@@ -13,6 +13,28 @@ using namespace model;
 #include <string>
 using namespace std;
 
+#define WINDOW_WIDTH 400
+#define WINDOW_HEIGHT 300
+#define WINDOW_TITLE "Your Stats"
+#define STATS_BUTTON_WIDTH 70
+#define STATS_BUTTON_HEIGHT 30
+#define MAX_GUESS 6
+#define OK_BUTTON_X 165
+#define OK_BUTTON_Y 255
+#define OUTPUT_HEIGHT 20
+#define OUTPUT_WIDTH 50
+#define TOTAL_GAME_X 275
+#define TOTAL_GAME_Y 0
+#define WINRATE_X 225
+#define WINRATE_Y 25
+#define WINSTREAK_X 240
+#define WINSTREAK_Y 50
+#define HIGHEST_STREAK_X 295
+#define HIGHEST_STREAK_Y 75
+#define DISPLAY_TEXT_POSITION 100
+#define DISPLAY_TEXT_WIDTH 200
+#define DISPLAY_TEXT_HEIGHT 150
+#define INDEX_VALUE 1
 namespace view
 {
 

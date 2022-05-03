@@ -3,6 +3,10 @@
 
 #include <string>
 #include <vector>
+#include <fstream>
+#include <cstdlib>
+#include <ctime>
+#include <iostream>
 using namespace std;
 
 #include "Utils.h"
@@ -10,7 +14,6 @@ using namespace utils;
 
 namespace model
 {
-
 class WordleManager
 {
 public:
@@ -34,7 +37,6 @@ public:
     vector<WordleManager::LetterState> getDetails(const string& word);
     vector<string>& getDictionary();
 };
-
 };
 
 #endif // WORDLEMANAGER_H

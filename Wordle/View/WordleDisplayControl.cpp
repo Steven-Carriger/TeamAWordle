@@ -6,8 +6,6 @@ using namespace std;
 
 #include <FL/Fl_Box.H>
 
-#define DISPLAY_GAP 5
-
 namespace view
 {
 
@@ -43,9 +41,9 @@ WordleDisplayControl::~WordleDisplayControl()
 
 void WordleDisplayControl::createGrid()
 {
-    int boxSize = min((this->w() - (this->wordLength - 1) * DISPLAY_GAP) / this->wordLength, (this->h() - (this->guessLimit - 1) * DISPLAY_GAP)/ this->guessLimit);
-    int initX = this->x() + (this->w() - (this->wordLength - 1) * DISPLAY_GAP - wordLength * boxSize) / 2;
-    int initY = this->y() + (this->h() - (this->guessLimit - 1) * DISPLAY_GAP - guessLimit * boxSize) / 2;
+    int boxSize = min((this->w() - (this->wordLength - LETTER_VALUE) * DISPLAY_GAP) / this->wordLength, (this->h() - (this->guessLimit - LETTER_VALUE) * DISPLAY_GAP)/ this->guessLimit);
+    int initX = this->x() + (this->w() - (this->wordLength - LETTER_VALUE) * DISPLAY_GAP - wordLength * boxSize) / 2;
+    int initY = this->y() + (this->h() - (this->guessLimit - LETTER_VALUE) * DISPLAY_GAP - guessLimit * boxSize) / 2;
     for (int i = 0; i < guessLimit * wordLength; i++)
     {
         this->boxs.push_back(new Fl_Box(Fl_Boxtype::FL_BORDER_BOX, initX + (i % wordLength) * (boxSize + DISPLAY_GAP), initY + (i / wordLength) * (boxSize + DISPLAY_GAP), boxSize, boxSize, ""));
@@ -61,7 +59,7 @@ void WordleDisplayControl::createGrid()
 */
 bool WordleDisplayControl::addLetter(const char* letter)
 {
-    if (this->guessing && this->currLetter < this->wordLength * (this->currWord + 1))
+    if (this->guessing && this->currLetter < this->wordLength * (this->currWord + LETTER_VALUE))
     {
         this->child(this->currLetter)->label(letter);
         this->currLetter++;
@@ -77,9 +75,9 @@ bool WordleDisplayControl::addLetter(const char* letter)
 */
 bool WordleDisplayControl::removeLetter()
 {
-    if (this->guessing && this->currWord * this->wordLength <= this->currLetter - 1 )
+    if (this->guessing && this->currWord * this->wordLength <= this->currLetter - LETTER_VALUE )
     {
-        this->child(this->currLetter - 1)->label(nullptr);
+        this->child(this->currLetter - LETTER_VALUE)->label(nullptr);
         this->currLetter--;
         return true;
     }
@@ -116,7 +114,7 @@ void WordleDisplayControl::submitWord(vector<WordleManager::LetterState> wordSta
         currIndx++;
     }
     this->currWord++;
-    this->guessing = !isAllCorrect && this->currWord != 6;
+    this->guessing = !isAllCorrect && this->currWord != GUESS_LIMIT;
     this->redraw();
     if (!this->guessing)
     {

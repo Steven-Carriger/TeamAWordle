@@ -1,6 +1,5 @@
 #include "WordleManager.h"
 
-#include <fstream>
 #include <cstdlib>
 #include <ctime>
 #include <iostream>

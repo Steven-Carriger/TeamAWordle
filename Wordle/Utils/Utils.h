@@ -5,9 +5,11 @@
 #include <sstream>
 #include <iostream>
 #include <string>
+#include <algorithm>
 using namespace std;
 
 #define GUESS_LIMIT 6
+#define EMPTY_STRING " "
 namespace utils
 {
 const string toUpperCase(string text);

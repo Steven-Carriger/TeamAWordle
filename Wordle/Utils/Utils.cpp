@@ -1,8 +1,5 @@
 #include "Utils.h"
 
-#include <algorithm>
-using namespace std;
-
 namespace utils
 {
 
@@ -34,7 +31,7 @@ vector<string> split(string strToSplit, char delimeter)
     vector<string> splittedStrings;
     while (getline(ss, item, delimeter))
     {
-        if (item != " ")
+        if (item != EMPTY_STRING)
         {
             splittedStrings.push_back(item);
         }

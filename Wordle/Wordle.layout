@@ -42,9 +42,9 @@
 			<Cursor1 position="396" topLine="14" />
 		</Cursor>
 	</File>
-	<File name="View/StatisticsWindow.h" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="View/LoginWindow.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="873" topLine="5" />
+			<Cursor1 position="271" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="View/WordleWindow.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -87,9 +87,14 @@
 			<Cursor1 position="2533" topLine="79" />
 		</Cursor>
 	</File>
+	<File name="View/WordleWindow.cpp" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="25" topLine="101" />
+		</Cursor>
+	</File>
 	<File name="View/LoginWindow.cpp" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1020" topLine="8" />
+			<Cursor1 position="407" topLine="8" />
 		</Cursor>
 	</File>
 	<File name="main.cpp" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">

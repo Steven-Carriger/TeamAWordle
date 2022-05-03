@@ -58,15 +58,15 @@ void StatisticsManager::increasePlayersStats(bool didWin, int timesGuessed)
 {
     if (didWin)
     {
-        this->currentPlayer->setCurrentWinStreak(this->currentPlayer->getCurrentWinStreak() + 1);
-        this->currentPlayer->setTotalWins(this->currentPlayer->getTotalWins() + 1);
-        this->currentPlayer->setGuessCountAtIndex(timesGuessed - 1, this->currentPlayer->getAmountOfGuessesAtIndex(timesGuessed - 1) + 1);
+        this->currentPlayer->setCurrentWinStreak(this->currentPlayer->getCurrentWinStreak() + WIN_VALUE);
+        this->currentPlayer->setTotalWins(this->currentPlayer->getTotalWins() + WIN_VALUE);
+        this->currentPlayer->setGuessCountAtIndex(timesGuessed - WIN_VALUE, this->currentPlayer->getAmountOfGuessesAtIndex(timesGuessed - WIN_VALUE) + WIN_VALUE);
     }
     else
     {
-        this->currentPlayer->setCurrentWinStreak(0);
+        this->currentPlayer->setCurrentWinStreak(LOSS_STREAK_VALUE);
     }
-    this->currentPlayer->setTotalGames(this->currentPlayer->getTotalGames() + 1);
+    this->currentPlayer->setTotalGames(this->currentPlayer->getTotalGames() + WIN_VALUE);
 }
 
 /**

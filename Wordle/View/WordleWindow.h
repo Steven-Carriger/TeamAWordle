@@ -14,7 +14,10 @@
 #include <ctype.h>
 #include <iostream>
 #include <vector>
+#include <iostream>
+#include <functional>
 using namespace std;
+using namespace std::placeholders;
 
 #include "WordleManager.h"
 #include "SettingsManager.h"
@@ -27,6 +30,12 @@ using namespace model;
 #include "LoginWindow.h"
 #include "FileManager.h"
 
+#define PADDING 20
+#define GUESS_LIMIT 6
+#define WORD_LENGTH 5
+#define BUTTON_HEIGHT 25
+#define BUTTON_X 440
+#define BUTTON_WIDTH 60
 namespace view
 {
 
