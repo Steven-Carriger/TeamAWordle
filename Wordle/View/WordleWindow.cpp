@@ -14,9 +14,8 @@ WordleWindow::WordleWindow(int width, int height, const char* title) : Fl_Window
 {
     this->setUpManagers();
     begin();
-    this->displayControl = new WordleDisplayControl(PADDING, PADDING, width - 2 * PADDING, (height - PADDING) / 2, GUESS_LIMIT, this->settingsManager->getWordLength());
-    this->keyboardControl = new WordleKeyboardControl(PADDING, (height - PADDING) / 2, width - 2 * PADDING, height / 2);
-    this->isReuseAllowed = false;
+    this->displayControl = new WordleDisplayControl(PADDING, PADDING, width - 2 * PADDING, (height - 2 * PADDING - BUTTON_HEIGHT - 2 * GAP) / 2, GUESS_LIMIT, this->settingsManager->getWordLength());
+    this->keyboardControl = new WordleKeyboardControl(PADDING, (height - 2 * PADDING - BUTTON_HEIGHT - 2 * GAP) / 2 + PADDING + GAP, width - 2 * PADDING, (height - 2 * PADDING - BUTTON_HEIGHT - 2 * GAP) / 2);
     this->setUpHandlers();
     this->setUpButtons();
     end();
@@ -34,15 +33,28 @@ void WordleWindow::handleEnterPress(WordleWindow* window)
 {
     if (window->manager->validateWord(window->word))
     {
-        window->displayControl->submitWord(window->manager->getDetails(window->word), window->statisticsManager);
         window->keyboardControl->updateKeys(window->manager->getDetails(window->word), window->word);
+        window->displayControl->submitWord(window->manager->getDetails(window->word));
         window->word = "";
     }
 }
 
 void WordleWindow::handleWin(WordleWindow* window, int wordCount)
 {
-    switch ( fl_choice("You Won! What do you want to do next?", "Logout", "Play Agian", "Exit") ) {
+    showEndPopup(window, "You Won! What do you want to do next?", nullptr);
+    window->statisticsManager->increasePlayersStats(true, wordCount);
+}
+
+void WordleWindow::handleLoss(WordleWindow* window)
+{
+    string word = window->manager->getCurrentWord();
+    showEndPopup(window, "You Lost! The word was %s. What do you want to do?", word.c_str());
+    window->statisticsManager->increasePlayersStats(false, 7);
+}
+
+void WordleWindow::showEndPopup(WordleWindow* window, const char* endMessage, const void* endData)
+{
+    switch ( fl_choice(endMessage, "Logout", "Play Agian", "Exit", endData) ) {
         case 0:
             {
                 window->fileManager->saveUserData(window->statisticsManager);
@@ -60,16 +72,6 @@ void WordleWindow::handleWin(WordleWindow* window, int wordCount)
     }
 }
 
-void WordleWindow::handleLoss(WordleWindow* window)
-{
-    const string word = window->manager->getCurrentWord();
-    switch ( fl_choice("You Lost! The word was %s. What do you want to do?", "Logout", "Play Agian", "Exit", word.c_str()) ) {
-        case 0: break;
-        case 1: break;
-        case 2: window->hide();
-    }
-}
-
 void WordleWindow::handleBackPress(WordleWindow* window)
 {
     if (window->displayControl->removeLetter())
@@ -80,9 +82,10 @@ void WordleWindow::handleBackPress(WordleWindow* window)
 
 void WordleWindow::restart()
 {
-    this->displayControl->clean();
+    this->displayControl->clean(this->settingsManager->getWordLength());
     this->keyboardControl->clean();
-    this->manager->randomizeWord(5);
+    this->manager->randomizeWord(this->settingsManager->getWordLength());
+    this->word = "";
 }
 
 void WordleWindow::cbDisplayUserStats(Fl_Widget* widget, void* data)
@@ -98,10 +101,19 @@ void WordleWindow::cbDisplayUserStats(Fl_Widget* widget, void* data)
     }
 }
 
-void WordleWindow::cbSaveUserStats(Fl_Widget* widget, void* data)
+void WordleWindow::cbLogout(Fl_Widget* widget, void* data)
 {
     WordleWindow* window = (WordleWindow*) data;
     window->fileManager->saveUserData(window->statisticsManager);
+    string user = window->displayUserLogin();
+    window->statisticsManager->setCurrentUser(user);
+    window->restart();
+}
+
+void WordleWindow::cbRestart(Fl_Widget* widget, void* data)
+{
+    WordleWindow* window = (WordleWindow*) data;
+    window->restart();
 }
 
 void WordleWindow::cbDisplaySettings(Fl_Widget* widget, void* data)
@@ -115,11 +127,13 @@ void WordleWindow::cbDisplaySettings(Fl_Widget* widget, void* data)
     {
         Fl::wait();
     }
-    window->manager->setRepeatedLetters(settings.isReuseAllowed());
-    window->settingsManager->setRepeatsAllowed(settings.isReuseAllowed());
-    window->settingsManager->setWordLength(settings.getWordLength());
-    window->fileManager->saveSettingsData(window->settingsManager);
-    //window->restart();
+    if (settings.isShouldRestart()) {
+        window->manager->setRepeatedLetters(settings.isReuseAllowed());
+        window->settingsManager->setRepeatsAllowed(settings.isReuseAllowed());
+        window->settingsManager->setWordLength(settings.getWordLength());
+        window->fileManager->saveSettingsData(window->settingsManager);
+        window->restart();
+    }
 }
 
 string WordleWindow::displayUserLogin()
@@ -164,11 +178,13 @@ void WordleWindow::setUpManagers()
 
 void WordleWindow::setUpButtons()
 {
-    this->saveButton = new Fl_Button(BUTTON_X, PADDING, BUTTON_WIDTH, BUTTON_HEIGHT, "Save");
-    this->settingsButton = new Fl_Button(BUTTON_X, PADDING + BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT, "Settings");
-    this->statisticsButton = new Fl_Button(BUTTON_X, PADDING + BUTTON_HEIGHT + BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT, "Stats");
+    this->logoutButton = new Fl_Button((this->w() - 4 * BUTTON_WIDTH - 4 * GAP) / 2, this->h() - PADDING - BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT, "Logout");
+    this->settingsButton = new Fl_Button((this->w() - 4 * BUTTON_WIDTH - 4 * GAP) / 2 + BUTTON_WIDTH + GAP, this->h() - PADDING - BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT, "Settings");
+    this->statisticsButton = new Fl_Button((this->w() - 4 * BUTTON_WIDTH - 4 * GAP) / 2 + 2 * BUTTON_WIDTH + 2 * GAP, this->h() - PADDING - BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT, "Stats");
+    this->restartButton = new Fl_Button((this->w() - 4 * BUTTON_WIDTH - 4 * GAP) / 2 + 3 * BUTTON_WIDTH + 3 * GAP, this->h() - PADDING - BUTTON_HEIGHT, BUTTON_WIDTH, BUTTON_HEIGHT, "Restart");
 
-    this->saveButton->callback(cbSaveUserStats, this);
+    this->logoutButton->callback(cbLogout, this);
+    this->restartButton->callback(cbRestart, this);
     this->settingsButton->callback(cbDisplaySettings, this);
     this->statisticsButton->callback(cbDisplayUserStats, this);
 }

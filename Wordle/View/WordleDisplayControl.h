@@ -6,7 +6,6 @@
 using namespace std;
 
 #include "WordleManager.h"
-#include "StatisticsManager.h"
 using namespace model;
 
 #include <FL/Fl_Group.H>
@@ -40,8 +39,8 @@ public:
     bool removeLetter();
     void setLossCallback(LossCallback callback);
     void setWinCallback(WinCallback callback);
-    void clean();
-    void submitWord(vector<WordleManager::LetterState> wordState, StatisticsManager* statsManager);
+    void clean(int wordLength);
+    void submitWord(vector<WordleManager::LetterState> wordState);
 private:
     void createGrid();
 };

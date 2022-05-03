@@ -22,11 +22,13 @@ private:
     Fl_Button* okButton;
     Fl_Check_Button* allowReuseButton;
     Fl_Input_Choice* wordLengthComboBox;
+    bool shouldRestart;
 public:
     SettingsWindow(SettingsManager* manager);
     virtual ~SettingsWindow();
     static void cbOk(Fl_Widget* widget, void* data);
     bool isReuseAllowed();
+    bool isShouldRestart();
     int getWordLength();
 };
 
