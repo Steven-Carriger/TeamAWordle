@@ -67,24 +67,34 @@ void FileManager::loadUserData(StatisticsManager* manager)
     inputFile.close();
 }
 
+/**
+* Loads all of the settings to the specified SettingsManager
+*
+* @param manager The SettingsManager to load to
+*/
 void FileManager::loadSettingsData(SettingsManager* manager)
 {
-    ifstream inputFile("settings.config");
+    ifstream inputFile(SETTINGS_FILEPATH);
     if (inputFile.is_open())
     {
         string line;
         getline(inputFile, line);
         vector<string> settings = split(line, ',');
-        manager->setRepeatsAllowed(toBool(settings[0]));
-        manager->setWordLength(toInt(settings[1], "Not valid word length"));
+        manager->setRepeatsAllowed(toBool(settings[IS_REPEAT_ALLOWED_INDEX]));
+        manager->setWordLength(toInt(settings[WORD_LENGTH_INDEX], "Not valid word length"));
         inputFile.close();
     }
 }
 
+/**
+* Saves all of the settings from the specified SettingsManager to the settings file
+*
+* @param manager The SettingsManager to extract the settings from
+*/
 void FileManager::saveSettingsData(SettingsManager* manager)
 {
     ofstream saveFile;
-    saveFile.open("settings.config");
+    saveFile.open(SETTINGS_FILEPATH);
     saveFile << manager->isRepeatsAllowed() << "," << manager->getWordLength() << endl;
     saveFile.close();
 }
