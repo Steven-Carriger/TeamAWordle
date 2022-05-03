@@ -20,7 +20,7 @@ using namespace utils;
 #define SETTINGS_WINDOW_TITLE "Settings"
 #define INPUT_WIDTH 70
 #define INPUT_HEIGHT 30
-#define GAP 10
+#define SETTINGS_GAP 10
 namespace view
 {
 
