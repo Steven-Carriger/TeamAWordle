@@ -1,5 +1,7 @@
 #include "WordleManager.h"
 
+
+#define WORD_PRINT true
 namespace model
 {
 
@@ -65,7 +67,7 @@ void WordleManager::randomizeWord(int wordLength)
         }
     }
     this->currentWord = tmpWord;
-    cout << this->currentWord << endl;
+    if (WORD_PRINT) cout << this->currentWord << endl;
 }
 
 /**
@@ -109,22 +111,24 @@ bool WordleManager::guessWord(const string& word)
 vector<WordleManager::LetterState> WordleManager::getDetails(const string& word)
 {
     vector<WordleManager::LetterState> states(this->currentWord.length());
+    string tmpWord(this->currentWord);
     for (int i = 0; i < word.length(); ++i)
     {
-        if (this->currentWord.find(tolower(word[i])) != string::npos)
+        if (tolower(word[i]) == this->currentWord[i])
+        {
+            states[i] = LetterState::CORRECT;
+            tmpWord.replace(tmpWord.begin(), tmpWord.end(), word[i], ' ');
+        }
+    }
+
+    for (int i = 0; i < word.length(); ++i)
+    {
+        if (tmpWord.find(tolower(word[i])) != string::npos)
         {
             states[i] = WordleManager::LetterState::IN_WORD;
         }
     }
 
-    for (int i = 0; i < word.length(); ++i)
-    {
-
-        if (tolower(word[i]) == this->currentWord[i])
-        {
-            states[i] = LetterState::CORRECT;
-        }
-    }
 
     return states;
 }

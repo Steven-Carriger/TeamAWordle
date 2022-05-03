@@ -9,6 +9,7 @@
 #include <FL/Fl_Text_Buffer.H>
 #include <FL/Fl_Text_Display.H>
 #include <FL/Fl_Button.H>
+#include <FL/fl_ask.H>
 
 #include "string.h"
 #include <ctype.h>
@@ -34,8 +35,8 @@ using namespace model;
 #define GUESS_LIMIT 6
 #define WORD_LENGTH 5
 #define BUTTON_HEIGHT 25
-#define BUTTON_X 440
-#define BUTTON_WIDTH 60
+#define GAP 15
+#define BUTTON_WIDTH 70
 namespace view
 {
 
@@ -50,7 +51,8 @@ private:
     bool isReuseAllowed;
     WordleDisplayControl* displayControl;
     WordleKeyboardControl* keyboardControl;
-    Fl_Button* saveButton;
+    Fl_Button* logoutButton;
+    Fl_Button* restartButton;
     Fl_Button* settingsButton;
     Fl_Button* statisticsButton;
     void setUpHandlers();
@@ -63,12 +65,14 @@ public:
     virtual ~WordleWindow();
 private:
     static void cbDisplayUserStats(Fl_Widget* widget, void* data);
-    static void cbSaveUserStats(Fl_Widget* widget, void* data);
+    static void cbLogout(Fl_Widget* widget, void* data);
+    static void cbRestart(Fl_Widget* widget, void* data);
     static void cbDisplaySettings(Fl_Widget* widget, void* data);
     static void handleLetterPress(WordleWindow* window, const char* key);
     static void handleEnterPress(WordleWindow* window);
     static void handleWin(WordleWindow* window, int wordCount);
     static void handleLoss(WordleWindow* window);
+    static void showEndPopup(WordleWindow* window, const char* endMessage, const void* endData);
     static void handleBackPress(WordleWindow* window);
 };
 }

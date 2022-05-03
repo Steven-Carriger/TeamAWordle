@@ -105,7 +105,7 @@ bool WordleDisplayControl::removeLetter()
 * @param wordState the states of the letters to determine how to display them
 * @param statsManager the manager to use if the game is finishes after this word is submitted
 */
-void WordleDisplayControl::submitWord(vector<WordleManager::LetterState> wordState, StatisticsManager* statsManager)
+void WordleDisplayControl::submitWord(vector<WordleManager::LetterState> wordState)
 {
     if (!this->guessing || this->currLetter == 0 || this->currLetter % this->wordLength != 0) return;
     int currIndx = this->currWord * this->wordLength;
@@ -132,10 +132,6 @@ void WordleDisplayControl::submitWord(vector<WordleManager::LetterState> wordSta
     this->currWord++;
     this->guessing = !isAllCorrect && this->currWord != GUESS_LIMIT;
     this->redraw();
-    if (!this->guessing)
-    {
-      statsManager->increasePlayersStats(isAllCorrect, this->currWord);
-    }
     if (isAllCorrect) this->winCallback(this->currWord);
     if (this->currWord == 6) this->lossCallback();
 }
@@ -148,12 +144,14 @@ void WordleDisplayControl::clean()
     this->currLetter = 0;
     this->currWord = 0;
     this->guessing = true;
-    for (int i = 0; i < guessLimit * wordLength; i++)
-    {
-        this->child(i)->label(nullptr);
-        this->child(i)->color(FL_GRAY);
-        this->child(i)->labelcolor(FL_BLACK);
-    }
+    this->clear();
+    this->boxs.erase(this->boxs.begin(), this->boxs.end());
+    this->wordLength = wordLength;
+    this->box(FL_FLAT_BOX);
+    this->redraw();
+    begin();
+    this->createGrid();
+    end();
 }
 
 }

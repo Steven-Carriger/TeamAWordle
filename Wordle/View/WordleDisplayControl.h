@@ -11,7 +11,6 @@
 using namespace std;
 
 #include "WordleManager.h"
-#include "StatisticsManager.h"
 using namespace model;
 
 #define DISPLAY_GAP 5
@@ -42,8 +41,8 @@ public:
     bool removeLetter();
     void setLossCallback(LossCallback callback);
     void setWinCallback(WinCallback callback);
-    void clean();
-    void submitWord(vector<WordleManager::LetterState> wordState, StatisticsManager* statsManager);
+    void clean(int wordLength);
+    void submitWord(vector<WordleManager::LetterState> wordState);
 private:
     void createGrid();
 };
