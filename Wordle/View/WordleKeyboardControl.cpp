@@ -1,11 +1,5 @@
 #include "WordleKeyboardControl.h"
 
-#define KEYBOARD_GAP 5
-#define NON_LETTER_LENGTH 15
-#define NUM_FIRST_ROW 10
-#define NUM_OTHER_ROW 9
-#define NUM_ROW 3
-
 #include <algorithm>
 #include <iostream>
 using namespace std;
@@ -15,6 +9,14 @@ using namespace std;
 namespace view
 {
 
+/**
+* Creates a new WordleKeyboardControl
+*
+* @param x the x value of the control
+* @param y the y value of the control
+* @param width the width of the control
+* @param height the height of the control
+*/
 WordleKeyboardControl::WordleKeyboardControl(int x, int y, int width, int height) : Fl_Group(x, y, width, height, nullptr)
 {
     begin();
@@ -22,12 +24,13 @@ WordleKeyboardControl::WordleKeyboardControl(int x, int y, int width, int height
     end();
 }
 
+/**
+* The WordleKeyboardControl deconstructor
+*/
 WordleKeyboardControl::~WordleKeyboardControl()
 {
     //dtor
 }
-
-
 
 void WordleKeyboardControl::createButtons()
 {
@@ -70,21 +73,35 @@ void WordleKeyboardControl::createButtons()
             newKeyButton->shortcut(tolower(keyLabels[i][0]));
         }
 
-
         this->buttons.push_back(newKeyButton);
     }
 }
 
+/**
+* Sets the current call back based on the provided call back
+*
+* @param letterCallback the LetterCallback to set to
+*/
 void WordleKeyboardControl::setLetterCallback(LetterCallback letterCallback)
 {
     this->letterCallback = letterCallback;
 }
 
+/**
+* Sets the current call back based on the provided call back
+*
+* @param enterCallback the EnterCallback to set to
+*/
 void WordleKeyboardControl::setEnterCallback(EnterCallback enterCallback)
 {
     this->enterCallback = enterCallback;
 }
 
+/**
+* Sets the current call back based on the provided call back
+*
+* @param backCallback the BackCallback to set to
+*/
 void WordleKeyboardControl::setBackCallback(BackCallback backCallback)
 {
     this->backCallback = backCallback;
@@ -108,12 +125,20 @@ void WordleKeyboardControl::handleBackPress(Fl_Widget* sender)
     keyboard->backCallback();
 }
 
+
+/**
+* updates the display of the keys based on the state of the letters
+*
+* @param wordState a collection of states based on the provided word
+* @param userWord the word the user provided
+*/
 void WordleKeyboardControl::updateKeys(vector<WordleManager::LetterState> wordState, const string& userWord)
 {
     for (int currIndx = 0; currIndx < userWord.length(); currIndx++)
     {
         Fl_Button* button = this->getKeyWithLetter(userWord[currIndx]);
-        if (button != nullptr) {
+        if (button != nullptr)
+        {
             this->setKeyStatus(button, wordState[currIndx]);
         }
     }
@@ -122,17 +147,26 @@ void WordleKeyboardControl::updateKeys(vector<WordleManager::LetterState> wordSt
 
 void WordleKeyboardControl::setKeyStatus(Fl_Button* key, WordleManager::LetterState letterState)
 {
+    if (key->color() == FL_GREEN)
+    {
+        return;
+    }
     switch (letterState)
     {
-        case WordleManager::LetterState::CORRECT:
-            key->color(FL_GREEN);
+    case WordleManager::LetterState::CORRECT:
+        key->color(FL_GREEN);
+        return;
+    case WordleManager::LetterState::IN_WORD:
+        key->color(FL_YELLOW);
+        return;
+    case WordleManager::LetterState::NOT_IN_WORD:
+        if (key->color() != FL_GRAY)
+        {
             return;
-        case WordleManager::LetterState::IN_WORD:
-            key->color(FL_YELLOW);
-            return;
-        case WordleManager::LetterState::NOT_IN_WORD:
-            key->color(FL_BLACK);
-            return;
+        }
+        key->color(FL_BLACK);
+        key->labelcolor(FL_WHITE);
+        return;
     }
 }
 
@@ -140,12 +174,22 @@ Fl_Button* WordleKeyboardControl::getKeyWithLetter(const char letter)
 {
     for (Fl_Button* button : this->buttons)
     {
-        if (strcmp(button->label(), &letter) == 0)
+        if (toLowerCase(button->label()) == toLowerCase(&letter))
         {
             return button;
         }
     }
     return nullptr;
+}
+
+void WordleKeyboardControl::clean()
+{
+    for (Fl_Button* button : this->buttons)
+    {
+        button->color(FL_GRAY);
+        button->labelcolor(FL_BLACK);
+    }
+    this->redraw();
 }
 
 }

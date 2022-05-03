@@ -2,6 +2,7 @@
 #define WORDLEDISPLAYCONTROL_H
 
 #include <string>
+#include <functional>
 using namespace std;
 
 #include "WordleManager.h"
@@ -10,11 +11,17 @@ using namespace model;
 #include <FL/Fl_Group.H>
 #include <FL/Fl_Box.H>
 
+#define DISPLAY_GAP 5
+#define GUESS_LIMIT 6
+#define LETTER_VALUE 1
 namespace view
 {
 
 class WordleDisplayControl : private Fl_Group
 {
+public:
+    typedef function<void()> LossCallback;
+    typedef function<void(int)> WinCallback;
 private:
     int guessLimit;
     int wordLength;
@@ -22,12 +29,17 @@ private:
     int currWord;
     bool guessing;
     vector<Fl_Box*> boxs;
+    LossCallback lossCallback;
+    WinCallback winCallback;
 
 public:
     WordleDisplayControl(int x, int y, int width, int height, int guessLimit, int wordLength);
     virtual ~WordleDisplayControl();
     bool addLetter(const char* letter);
     bool removeLetter();
+    void setLossCallback(LossCallback callback);
+    void setWinCallback(WinCallback callback);
+    void clean(int wordLength);
     void submitWord(vector<WordleManager::LetterState> wordState);
 private:
     void createGrid();

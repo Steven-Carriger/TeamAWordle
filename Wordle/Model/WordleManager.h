@@ -3,11 +3,17 @@
 
 #include <string>
 #include <vector>
+#include <fstream>
+#include <cstdlib>
+#include <ctime>
+#include <iostream>
 using namespace std;
+
+#include "Utils.h"
+using namespace utils;
 
 namespace model
 {
-
 class WordleManager
 {
 public:
@@ -18,6 +24,7 @@ public:
 private:
     vector<string> dictionary;
     string currentWord;
+    bool allowRepeatLetters;
 public:
     WordleManager();
     virtual ~WordleManager();
@@ -25,11 +32,11 @@ public:
     void randomizeWord(int wordLength);
     bool validateWord(const string& word);
     bool guessWord(const string& word);
+    void setRepeatedLetters(bool allowRepeatLetters);
+    bool isRepeatedLettersAllowed();
     vector<WordleManager::LetterState> getDetails(const string& word);
-private:
-    void load();
+    vector<string>& getDictionary();
 };
-
 };
 
 #endif // WORDLEMANAGER_H
