@@ -13,6 +13,7 @@ namespace utils
 const string toUpperCase(string text);
 const string toLowerCase(string text);
 int toInt(const string& text, const char* errorMessage);
+bool toBool(const string& test);
 vector<string> split(string, char);
 }
 #endif // UTILS_H

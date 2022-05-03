@@ -15,6 +15,7 @@ using namespace utils;
 #include "Player.h"
 #include "WordleManager.h"
 #include "StatisticsManager.h"
+#include "SettingsManager.h"
 
 namespace model
 {
@@ -26,7 +27,9 @@ public:
     virtual ~FileManager();
     void loadDictionary(WordleManager* manager);
     void loadUserData(StatisticsManager* manager);
+    void loadSettingsData(SettingsManager* manager);
     void saveUserData(StatisticsManager* manager);
+    void saveSettingsData(SettingsManager* manager);
 };
 }
 #endif // FILEMANAGER_H

@@ -64,6 +64,11 @@ int toInt(const string& text, const char* errorMessage)
     return value;
 }
 
+bool toBool(const string& text)
+{
+    return (bool) toInt(text, "must be 0 or 1");
+}
+
 /**
 * Converts the provided string to all lower case
 *

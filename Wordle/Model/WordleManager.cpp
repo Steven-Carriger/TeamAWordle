@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
+#include <algorithm>
 using namespace std;
 
 #include "Utils.h"
@@ -17,6 +18,7 @@ namespace model
 WordleManager::WordleManager()
 {
     srand((int) time(0));
+    this->allowRepeatLetters = false;
 }
 
 /**
@@ -59,6 +61,17 @@ void WordleManager::randomizeWord(int wordLength)
     {
         int indx = rand() % this->dictionary.size();
         tmpWord = this->dictionary[indx];
+        if (!this->allowRepeatLetters)
+        {
+            for (int i = 0; i < tmpWord.length(); i++)
+            {
+                if (count(tmpWord.begin(), tmpWord.end(), tmpWord[i]) > 1)
+                {
+                    tmpWord = "";
+                    break;
+                }
+            }
+        }
     }
     this->currentWord = tmpWord;
     cout << this->currentWord << endl;
@@ -123,6 +136,16 @@ vector<WordleManager::LetterState> WordleManager::getDetails(const string& word)
     }
 
     return states;
+}
+
+void WordleManager::setRepeatedLetters(bool allowRepeatLetters)
+{
+    this->allowRepeatLetters = allowRepeatLetters;
+}
+
+bool WordleManager::isRepeatedLettersAllowed()
+{
+    return this->allowRepeatLetters;
 }
 
 }

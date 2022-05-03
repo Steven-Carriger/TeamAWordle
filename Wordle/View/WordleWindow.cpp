@@ -21,13 +21,13 @@ namespace view
 */
 WordleWindow::WordleWindow(int width, int height, const char* title) : Fl_Window(width, height, title)
 {
+    this->setUpManagers();
     begin();
-    this->displayControl = new WordleDisplayControl(PADDING, PADDING, width - 2 * PADDING, (height - PADDING) / 2, GUESS_LIMIT, WORD_LENGTH);
+    this->displayControl = new WordleDisplayControl(PADDING, PADDING, width - 2 * PADDING, (height - PADDING) / 2, GUESS_LIMIT, this->settingsManager->getWordLength());
     this->keyboardControl = new WordleKeyboardControl(PADDING, (height - PADDING) / 2, width - 2 * PADDING, height / 2);
     this->isReuseAllowed = false;
     this->setUpKeyboardHandlers();
     this->setUpButtons();
-    this->setUpManagers();
     end();
 }
 
@@ -78,14 +78,18 @@ void WordleWindow::cbSaveUserStats(Fl_Widget* widget, void* data)
 void WordleWindow::cbDisplaySettings(Fl_Widget* widget, void* data)
 {
     WordleWindow* window = (WordleWindow*) data;
-    SettingsWindow settings(window->isReuseAllowed);
+    SettingsWindow settings(window->settingsManager);
     settings.show();
 
     while (settings.shown())
     {
         Fl::wait();
     }
-    window->isReuseAllowed = settings.isReuseAllowed();
+    window->manager->setRepeatedLetters(settings.isReuseAllowed());
+    window->settingsManager->setRepeatsAllowed(settings.isReuseAllowed());
+    window->settingsManager->setWordLength(settings.getWordLength());
+    window->fileManager->saveSettingsData(window->settingsManager);
+    //window->restart();
 }
 
 string WordleWindow::displayUserLogin()
@@ -112,13 +116,16 @@ void WordleWindow::setUpManagers()
 {
     this->manager = new WordleManager();
     this->statisticsManager = new StatisticsManager();
+    this->settingsManager = new SettingsManager();
     this->fileManager = new FileManager();
 
     this->fileManager->loadDictionary(this->manager);
+    this->fileManager->loadSettingsData(this->settingsManager);
     this->fileManager->loadUserData(this->statisticsManager);
 
     this->statisticsManager->setCurrentUser(this->displayUserLogin());
-    this->manager->randomizeWord(WORD_LENGTH);
+    this->manager->randomizeWord(this->settingsManager->getWordLength());
+    this->manager->setRepeatedLetters(this->settingsManager->isRepeatsAllowed());
     this->word = "";
 }
 
